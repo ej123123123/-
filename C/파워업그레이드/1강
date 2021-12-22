@@ -1,0 +1,130 @@
+예제1)
+
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+
+int main(void) {
+    char ch;
+    int iNum=0;
+    double dNum=0;
+    char str[100];
+
+    printf("[문자,정수,실수 문자열]의 포맷으로 입력: ");
+    scanf("%c, %d, %lf, %s", &ch, &iNum,&dNum, str);
+
+    printf("입력된 데이터 출력: ");
+    printf("%c, %d, %lf, %s \n", ch, iNum, dNum, str);
+
+    return 0;
+}
+
+1강은 ,가 중요하다. 파이썬하다가 C다시했는데 다 까먹었다.
+','를 구분자로 넣는지 안 넣는지를 판단할 수 있다는 것을 처음 알았다.
+
+
+
+예제2)
+
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#define STR_LEN 50
+
+int main(void) {
+
+	char name[STR_LEN];
+
+	fputs("문자여 입력: ", stdout);
+	gets(name);
+
+	fputs("입력된 문자열: ", stdout);
+	puts(name);
+	char num[100];
+	printf("문자열 입력2: ");
+	scanf("%s", &num);
+	printf("문자열 출력 %s", num);
+	return 0;
+}
+
+scanf와 표준입력함수인 gets 함수의 차이점을 알 수 있다.
+gets함수는 공백을 포함하며 'enter'가 문장의 끝을 의미한다.
+그러나 scanf는 공백을 기준으로 나눈다.
+
+예제3)
+
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+
+int main(void) {
+
+	int n1, n2;
+	int add;
+	fputs("두 수를 16진수로 입력: ",stdout);
+	scanf("%x %x", &n1, &n2);
+	add = n1 + n2;
+
+	printf("연산 결과 8진수: %o \n", add);
+	printf("연산 결과 10진수: %d \n", add);
+	printf("연산 결과 16진수: %x \n", add);
+
+	return 0;
+}
+
+서식문자 8진수 %o, 10진수 %d, 16진수 %x이다.
+
+예제4-1)
+
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+
+int main(void) {
+
+	int total1 = 0;
+	char input;
+
+	while (1) 
+	{
+		fputs("Data input (Ctrl+Z to exit): ", stdout);
+		input = getchar();
+		if (input == EOF)
+			break;
+		fflush(stdin);
+		total1++;
+	}
+	printf("입력된 문자의 수: %d \n", total1);
+	return 0;
+}
+
+
+getchar()는 엔터키도 입력으로 치기에 5개의 숫자를 받으면 10개를 카운트한다.
+getchar()는 입력버퍼의 맨 앞 글자를 받아오는 함수이다.
+fflush함수는 출력버퍼를 비우는 함수이다
+
+
+예제 4-2)
+
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+
+int main(void) {
+
+
+	int total = 0;
+	int input = 0;
+	int ret;
+
+	while (1)
+	{
+		fputs("Data input (Ctrl+Z to exit): ", stdout);
+		ret = scanf("%d", &input);
+		if (ret == EOF)
+			break;
+
+		total += input;
+	}
+	printf("총 합:%d \n", total);
+	return 0;
+}
+
+
+비주얼스튜디어 2015부터는 EOF가 세번눌러야 먹힌다고 한다.
+
