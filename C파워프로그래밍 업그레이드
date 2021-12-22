@@ -1,0 +1,20 @@
+C파워프로그래밍 업그레이드 1강 예제1
+
+#include <stdio.h>
+
+
+int main(void)
+{
+    char a;
+    int b;
+    double c;
+    char str[100];
+    printf("문자 입력:");
+    scanf("%c,%d,%lf,%s", &a, &b, &c, str);
+    printf("입력된 데이터 출력:");
+    printf("%c,%d,%f,%s\n", a, b, c, str);
+
+    return 0;
+
+}
+
