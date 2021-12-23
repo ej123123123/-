@@ -20,5 +20,168 @@ int main(void)
 }
 
 
-재귀는 메모리에 차례로 올라오고, 맨 마지막부터 사라진다.
+재귀는 메모리에 차례로 올라오고, 맨 마지막부터 사라진다. 스택구조처럼 활용이 된다.
+
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+
+
+
+int Factorial(int n)
+{
+	if (n == 0)
+		return 1;
+	else
+		return n * Factorial(n - 1);
+}
+
+int main(void)
+{
+	printf("1!=%d \n", Factorial(1));
+	printf("1!=%d \n", Factorial(2));
+	printf("1!=%d \n", Factorial(3));
+	printf("1!=%d \n", Factorial(4));
+	printf("1!=%d \n", Factorial(9));
+	return 0;
+}
+
+
+순열을 해결할 수 있다.
+
+
+2-2 재귀의 활용
+
+피보나치 수열
+
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+
+
+
+int Fibo(int n)
+{
+	if (n == 1)
+		return 0;
+	else if (n == 2)
+		return 1;
+	else
+		return Fibo(n - 1) + Fibo(n - 2);
+}
+
+int main(void)
+{
+	int i;
+	for (i = 1; i < 15; i++)
+		printf("%d ", Fibo(i));
+	int num;
+	num = Fibo(2);
+	printf("%d", num);
+	return 0;
+}
+
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+
+
+
+int Fibo(int n)
+{
+	printf("func call param %d\n", n);
+
+	if (n == 1)
+		return 0;
+	else if (n == 2)
+		return 1;
+	else
+		return Fibo(n - 1) + Fibo(n - 2);
+}
+
+int main(void)
+{
+	Fibo(7);
+	return 0;
+}
+
+
+
+
+결과값
+func call param 7
+func call param 6
+func call param 5
+func call param 4
+func call param 3
+func call param 2
+func call param 1
+func call param 2
+func call param 3
+func call param 2
+func call param 1
+func call param 4
+func call param 3
+func call param 2
+func call param 1
+func call param 2
+func call param 5
+func call param 4
+func call param 3
+func call param 2
+func call param 1
+func call param 2
+func call param 3
+func call param 2
+func call param 1
+
+왼쪽 리커시브가 먼저들어간다. 왼쪽 리커시브가 1을 호출할 때까지 호출하다가 0이 호출되면 다시 올라온다. 그리고 오른쪽 리커시브가 들어간다.
+
+이진트리의 전위탐색과 비슷한 호출방법이 떠오른다.
+
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+
+
+
+int BsearchRecur(int ar[], int first, int last, int target)
+{
+	int mid;
+	if (first > last)
+		return -1;
+	mid = (first + last) / 2;
+
+	if (ar[mid] == target)
+		return mid;
+	else if (target < ar[mid])
+		return BsearchRecur(ar, first, mid - 1, target);
+	else
+		return BsearchRecur(ar, mid + 1, last, target);
+}
+
+int main(void)
+{
+	int arr[] = { 1,3,5,7,9 };
+	int idx;
+
+	idx = BsearchRecur(arr, 0, sizeof(arr) / sizeof(int) - 1, 7);
+	if (idx == -1)
+		printf("탐색 실패 \n");
+	else
+		printf("타겟 저장 인덱스:%d\n", idx);
+
+	idx = BsearchRecur(arr, 0, sizeof(arr) / sizeof(int) - 1, 4);
+	if (idx == -1)
+		printf("탐색 실패 \n");
+	else
+		printf("타겟 저장 인덱스:%d\n", idx);
+
+	return 0;
+}
+
+앞서 배운 이진탐색의 재귀적 호출, 아직 책에 시간복잡도가 나오지 않았다.
+
+나중에 탐색파트에 시간복잡도가 나올 것 같은데, 다만 반복구성보다 구리다고 한다.
+
+
+2-3 하노이타워
+
+
 
