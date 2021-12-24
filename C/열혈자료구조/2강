@@ -183,5 +183,33 @@ int main(void)
 
 2-3 하노이타워
 
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
 
+
+
+void HanoiTowerMove(int num, char from, char by, char to)
+{
+	if (num == 1)
+	{
+		printf("원반1을 %c에서 %c로 이동 \n", from, to);
+	}
+	else
+	{
+		HanoiTowerMove(num - 1, from, to, by);
+		printf("원반%d을(를) %c에서 %c로 이동 \n", num, from, to);
+		HanoiTowerMove(num - 1, by, from, to);
+	}
+}
+int main(void)
+{
+	HanoiTowerMove(3, 'A', 'B', 'C');
+	return 0;
+}
+
+
+하노이타워는 4개가 있다면, 3개만 다 옮기면 마지막 하나만처리하면 된다
+3개가 있다면 2개만 다 옮기면 하나만 처리하면 되고, 2개중에 하나를 처리하면 끝난다.
+
+하나빼고 나머지 다 옮기는 코드를 작성하는 재귀적 사고를 
 
