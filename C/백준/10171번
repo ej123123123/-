@@ -1,0 +1,12 @@
+#include <stdio.h>
+int main() {
+	printf("\\    /\\\n");
+	printf(" )  ( ')\n");
+	printf("(  /  )\n");
+	printf(" \\(__)|");
+	
+	return 0;
+}
+
+
+서식기호는 \를 써야 입력된다
