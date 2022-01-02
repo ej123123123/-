@@ -1,0 +1,142 @@
+#스택
+
+
+스택은 후입선출 방법이다. 처음 들어온 것은 밑에 깔리고 나중에 들어온 것이 먼저 나간다.
+
+스택의 ADT
+
+1)초기화
+2)비었는지 판단
+3)푸쉬(삽입)
+4)팝(삭제 및 반환)
+5)피크(맨 위의 요소)
+
+6-2) 배열기반 스택
+
+
+헤더파일)
+#ifndef __AB_STACK_H__
+#define __AB_STACK_H__
+
+#define TRUE	1
+#define FALSE	0
+#define STACK_LEN	100
+
+typedef int Data;
+
+typedef struct _arrayStack
+{
+	Data stackArr[STACK_LEN];
+	int topIndex;
+} ArrayStack;
+
+typedef ArrayStack Stack;
+
+void StackInit(Stack * pstack);
+int SIsEmpty(Stack * pstack);
+
+void SPush(Stack * pstack, Data data);
+Data SPop(Stack * pstack);
+Data SPeek(Stack * pstack);
+
+#endif
+
+
+##스택내에 들어간 것은 배열과 탑 인덱스뿐이 없다.
+배열기반으로 할 때는 맨 뒤에 저장을 한다.
+그래야 데이터를 다 미루지 않고 삽입이 가능하고 O(1)에 접근이 가능하다.
+
+
+
+ADT구현
+#include <stdio.h>
+#include <stdlib.h>
+#include "ArrayBaseStack.h"
+
+void StackInit(Stack * pstack)
+{
+	pstack->topIndex = -1;
+}
+
+int SIsEmpty(Stack * pstack)
+{
+	if(pstack->topIndex == -1)
+		return TRUE;
+	else
+		return FALSE;
+}
+
+void SPush(Stack * pstack, Data data)
+{
+	pstack->topIndex += 1;
+	pstack->stackArr[pstack->topIndex] = data;
+}
+
+Data SPop(Stack * pstack)
+{
+	int rIdx;
+
+	if(SIsEmpty(pstack))
+	{
+		printf("Stack Memory Error!");
+		exit(-1);
+	}
+
+	rIdx = pstack->topIndex;
+	pstack->topIndex -= 1;
+
+	return pstack->stackArr[rIdx];
+}
+
+Data SPeek(Stack * pstack)
+{
+	if(SIsEmpty(pstack))
+	{
+		printf("Stack Memory Error!");
+		exit(-1);
+	}
+
+	return pstack->stackArr[pstack->topIndex];
+}
+
+
+6-3) 연결리스트 기반 스택
+
+#ifndef __LB_STACK_H__
+#define __LB_STACK_H__
+
+#define TRUE	1
+#define FALSE	0
+
+typedef int Data;
+
+typedef struct _node
+{
+	Data data;
+	struct _node * next;
+} Node;
+
+typedef struct _listStack
+{
+	Node * head;
+} ListStack;
+
+
+typedef ListStack Stack;
+
+void StackInit(Stack * pstack);
+int SIsEmpty(Stack * pstack);
+
+void SPush(Stack * pstack, Data data);
+Data SPop(Stack * pstack);
+Data SPeek(Stack * pstack);
+
+#endif
+
+노드와 스택을 구현한다.
+노드는 동적할당을 할 수 있고, 스택은 앞과 같다.
+
+연결리스트 기반은 왼쪽(head)에 삽입하고 왼쪽에서 삭제를 한다
+
+6-3 계산기 구현
+
