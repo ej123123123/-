@@ -140,3 +140,137 @@ Data SPeek(Stack * pstack);
 
 6-3 계산기 구현
 
+
+계산기 구현은 우선
+
+괄호, 덧셈,뺄셈,나눗셈,곱셈에 따른 우선순위를 나눠야한다.
+
+switch ~ case 문을 통해 우선순위를 나누고
+
+*와 /가 가장높고 +,- 이후에 () 순으로 나뉜다.
+
+
+2개의 스택을 사용하는데
+
+숫자가 나오면 그냥 pop을 하고
+
+연산자가 나오면 우선 연산자 스택에 쌓는다.
+
+그리고 우선순위가 자신보다 높거나 같은 연산자를 만난다면 스택에 있던 연산자를 pop한다
+
+
+다음은 실행흐름을 나타낸다.
+
+void ConvToRPNExp(char exp[])
+{
+	Stack stack;
+	int expLen = strlen(exp);
+	char * convExp = (char*)malloc(expLen+1);
+
+	int i, idx=0;
+	char tok, popOp;
+	
+	memset(convExp, 0, sizeof(char)*expLen+1);
+	StackInit(&stack);
+
+	for(i=0; i<expLen; i++)
+	{
+		tok = exp[i];
+		if(isdigit(tok))
+		{
+			convExp[idx++] = tok;
+		}
+		else
+		{
+			switch(tok)
+			{
+			case '(':
+				SPush(&stack, tok);
+				break;
+
+			case ')':
+				while(1)
+				{
+					popOp = SPop(&stack);
+					if(popOp == '(')
+						break;
+					convExp[idx++] = popOp;
+				}
+				break;
+
+			case '+': case '-': 
+			case '*': case '/':
+				while(!SIsEmpty(&stack) && 
+						WhoPrecOp(SPeek(&stack), tok) >= 0)
+					convExp[idx++] = SPop(&stack);
+
+				SPush(&stack, tok);
+				break;
+			}
+		}
+	}
+
+	while(!SIsEmpty(&stack))
+		convExp[idx++] = SPop(&stack);
+
+	strcpy(exp, convExp);
+	free(convExp);
+}
+
+연산의 계산방법
+
+
+숫자는 연산자를 만난기 전까지 푸쉬를 계속한다.
+
+그리고 연산자가 나오면 
+
+switch문으로 맞는 문장으로 바꿔서 사칙연산을 수행한다.
+
+아래는 코드다
+
+#include <string.h>
+#include <ctype.h>
+#include "ListBaseStack.h"
+
+int EvalRPNExp(char exp[])
+{
+	Stack stack;
+	int expLen = strlen(exp);
+	int i;
+	char tok, op1, op2;
+
+	StackInit(&stack);
+
+	for(i=0; i<expLen; i++)
+	{
+		tok = exp[i];
+
+		if(isdigit(tok))
+		{
+			SPush(&stack, tok - '0');     // 숫자로 변환하여 PUSH!
+		}
+		else
+		{
+			op2 = SPop(&stack);     // 먼저 꺼낸 값이 두 번째 피연산자!
+			op1 = SPop(&stack);
+
+			switch(tok)
+			{
+			case '+':
+				SPush(&stack, op1+op2);
+				break;
+			case '-':
+				SPush(&stack, op1-op2);
+				break;
+			case '*':
+				SPush(&stack, op1*op2);
+				break;
+			case '/':
+				SPush(&stack, op1/op2);
+				break;
+			}
+		}
+	}
+	return SPop(&stack);
+}
+
