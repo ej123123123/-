@@ -1,0 +1,135 @@
+1)트리
+
+
+비선형 자료구조부터는 데이터의 저장보다는 표현에 중점을 둔다.
+
+트리의 ADT에서 중요한건 탐색과 삭제 등이 중요하다.
+
+이진트리는 자식노드의 수가 2를 넘지않는 트리를 이진트리라고 한다. 
+
+그렇기에 서브트리도 이러한 속성을 물려받는다.
+
+
+
+8-2) 이진트리의 구현
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "BinaryTree.h"
+
+BTreeNode * MakeBTreeNode(void)
+{
+	BTreeNode * nd = (BTreeNode*)malloc(sizeof(BTreeNode));
+
+	nd->left = NULL;
+	nd->right = NULL;
+	return nd;
+}
+
+BTData GetData(BTreeNode * bt)
+{
+	return bt->data;
+}
+
+void SetData(BTreeNode * bt, BTData data)
+{
+	bt->data = data;
+}
+
+BTreeNode * GetLeftSubTree(BTreeNode * bt)
+{
+	return bt->left;
+}
+
+BTreeNode * GetRightSubTree(BTreeNode * bt)
+{
+	return bt->right;
+}
+
+void MakeLeftSubTree(BTreeNode * main, BTreeNode * sub)
+{
+	if(main->left != NULL)
+		free(main->left);
+
+	main->left = sub;
+}
+
+void MakeRightSubTree(BTreeNode * main, BTreeNode * sub)
+{
+	if(main->right != NULL)
+		free(main->right);
+
+	main->right = sub;
+}
+
+
+#include <stdio.h>
+#include "BinaryTree.h"
+
+int main(void)
+{
+	BTreeNode * bt1 = MakeBTreeNode();
+	BTreeNode * bt2 = MakeBTreeNode();
+	BTreeNode * bt3 = MakeBTreeNode();
+	BTreeNode * bt4 = MakeBTreeNode();
+
+	SetData(bt1, 1);
+	SetData(bt2, 2);
+	SetData(bt3, 3);
+	SetData(bt4, 4);
+
+	MakeLeftSubTree(bt1, bt2);
+	MakeRightSubTree(bt1, bt3);
+	MakeLeftSubTree(bt2, bt4);
+
+	printf("%d \n",
+		GetData(GetLeftSubTree(bt1)));
+	printf("%d \n",
+		GetData(GetLeftSubTree(GetLeftSubTree(bt1))));
+
+	return 0;
+}
+
+
+
+순회가 없는 이진트리의 구현이다. 그렇기에 밑에 노드가 딸렸을 때 문제가 발생할 수 있다.
+
+8-3)트리의 순회
+
+전위,중위,후위 순회를 해서 노드를 다 방문할 수 있다.
+
+트리의 순회는 재귀적으로 구성되어야 한다.
+
+그렇기에 
+
+맨 끝 노드일 경우를 제외하면 계속해서 밑으로 내려간다
+
+void PreorderTraverse(BTreeNode*bt)
+{
+    if(bt=NULL)
+    return;
+    
+    printf("%d \n",bt->data);
+    PreorderTraverse(bt->left);
+    PreorderTraverse(bt->right);
+    printf("%d \n",bt->data);
+}
+
+8-4) 수식 트리
+
+
+
+수식트리는 연산자를 만날때까지 팝을 한다.
+
+그리고 피연산자 두개를 트리에 넣고 노드쪽에 피연산자를 삽입한다. 이를 다시 스택에 넣는 것으로 구성된다.
+
+전위순회를 하면 전위표기법
+
+중위순회를 하면 중위표기법
+
+후위순회를 하면 후위표기법
+
+으로 된 수식을 계산할 수 있다.
+
+
+코드 구현은 어렵다.
