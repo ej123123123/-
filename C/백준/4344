@@ -1,0 +1,31 @@
+#include<stdio.h>
+
+int main() {
+
+	int C = 0, N = 0;
+	scanf("%d", &C);
+
+	for (int i = 0; i < C; i++) {
+		scanf("%d", &N);
+		int score[1000], sum = 0;
+		double avg = 0.00;
+		for (int j = 0; j < N; j++) {
+			scanf("%d", &score[j]);
+			sum += score[j];
+		}
+
+		avg = (double)sum / N;
+		int count = 0;
+		for (int j = 0; j < N; j++) {
+			if (avg < score[j])
+				count++;
+		}
+		printf("%.3f%%\n", (double)count * 100 / N);
+	}
+	return 0;
+}
+
+숫자를 입력받아 평균보다 낮은 사람의 비율을 구한다.
+
+%.3f는 소수점 셋째짜리까지 표현을 한다.
+
