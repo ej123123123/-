@@ -1,0 +1,75 @@
+#5번
+
+
+int main(void)
+{
+	double num1,num2;
+	scanf("%lf %lf", &num1, &num2);
+
+	printf("덧셈 결과: %lf\n", num1 + num2);
+	printf("뺄셈 결과: %lf\n", num1 - num2);
+	printf("곱셈 결과: %lf\n", num1 * num2);
+	printf("나눗셈 결과: %lf\n", num1 / num2);
+
+	return 0;
+}
+
+
+※값을 scanf()로 입력받을 때
+
+float형에 저장할 것이라면 %f로 받고,
+
+double형에 저장할 것이라면 %lf로 받아야 한다.
+
+※값을 printf()로 출력할 때
+
+float형이나 double형이나 C95 버전까지는 %f로 출력해도 상관없었다.
+
+C99 버전에 와서는 입력값을 나눠받는 것처럼 출력값도 나눠서 출력하겠다?! 라는 일관성 명목으로 %lf가 추가되서
+
+double형은 %lf로도 출력이 가능해졌다.
+
+결론, %f로 출력해도 float형이나 double형 모두 이상없이 출력이 가능하다는 것!
+
+
+-> scanf로 입력받을 때와 printf의 출력의 서식문자가 항상 같다고 생각하지 말 것.
+
+
+
+#6번
+
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+
+
+int main(void)
+{
+	int num;
+	int max = 0, min = 0,sum=0;
+
+	fputs("정수형 데이터 입력: ", stdout);
+	scanf("%d", &num);
+	min = num;
+	max = num;
+	sum += num;
+
+	for (int i = 0; i < 6; i++)
+	{
+		printf("정수형 데이터 입력: ");
+		scanf("%d", &num);
+		if (num > max)
+			max = num;
+		if (num < min)
+			min = num;
+		sum += num;
+	}
+
+	printf("최대값: %d", max);
+	printf("최소값: %d", min);
+	printf("전체합: %d", sum);
+	printf("평균: %f", (double)sum / 7);
+	return 0;
+}
+
+초기에 한번 입력받고 for문을 돌리면 구현가능하다.
+
