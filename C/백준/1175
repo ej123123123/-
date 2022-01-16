@@ -1,0 +1,42 @@
+단어를 받아서 가장 많이 쓰인 단어를 반환하는 함수를 작성.
+
+
+1) 단어를 받는다
+2) 다 대문자로 고친다
+3) 단어마다 갯수를 샌다.
+
+
+#include <stdio.h>
+#include <string.h>
+
+char a[1000005];
+int arr[26];
+
+int main(){
+    int max = 0;
+    int size;
+    char ans;
+
+    scanf("%s",a);
+    size = strlen(a);
+
+    for(int i=0;i<size;i++)
+        if(a[i]>='a') arr[a[i]-'a']++;
+        else arr[a[i]-'A']++;
+
+    for(int i=0;i<26;i++)
+        if(arr[i]==max){
+            ans = '?';
+        }
+        else if(arr[i]>max){
+            max = arr[i];
+            ans = 'A'+i;
+        }
+
+    printf("%c",ans);
+
+    return 0;
+}
+
+
+코드를 글자로도 쓸 수 있구나
