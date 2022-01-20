@@ -1,0 +1,169 @@
+해쉬테이블
+
+
+해쉬테이블은 AVL TREE의 시간복잡도 O(log2N)보다 더 적은 O(1) 의 시간 복잡도를 갖는 방법이다.
+
+#include <stdio.h>
+
+typedef struct _empInfo
+{
+	int empNum;    // 직원의 고유번호
+	int age;     // 직원의 나이
+}EmpInfo;
+
+int main(void)
+{
+	EmpInfo empInfoArr[1000];
+	EmpInfo ei;
+	int eNum;
+
+	printf("사번과 나이 입력: ");
+	scanf("%d %d", &(ei.empNum), &(ei.age));
+	empInfoArr[ei.empNum] = ei;    // 단번에 저장!
+
+	printf("확인하고픈 직원의 사번 입력: ");
+	scanf("%d", &eNum);
+
+	ei = empInfoArr[eNum];    // 단번에 탐색!
+	printf("사번 %d, 나이 %d \n", ei.empNum, ei.age);
+	return 0;
+}
+
+
+구조체르 정의해서 사번과 나이를 저장한다.
+
+이 사번을 배열에 입력해서 그 위치를 바로 리턴한다. 그러나 여기에도 문제가 있다.
+
+사번이 길어지면 메모리적으로 얼마나 할당을 해야하는가?
+
+
+-> 그 해결책은 해쉬함수로, 사번을 적은 숫자로 바꿔주든가 여튼 다른 거로 바꿔준다.
+
+
+#include <stdio.h>
+
+typedef struct _empInfo
+{
+	int empNum;    // 직원의 고유번호
+	int age;     // 직원의 나이
+}EmpInfo;
+
+int GetHashValue(int empNum)
+{
+	return empNum % 100;
+}
+
+int main(void)
+{
+	EmpInfo empInfoArr[100];
+
+	EmpInfo emp1={20120003, 42};
+	EmpInfo emp2={20130012, 33};
+	EmpInfo emp3={20170049, 27};
+
+	EmpInfo r1, r2, r3;
+
+	// 키를 인덱스 값으로 이용해서 저장
+	empInfoArr[GetHashValue(emp1.empNum)] = emp1;
+	empInfoArr[GetHashValue(emp2.empNum)] = emp2;
+	empInfoArr[GetHashValue(emp3.empNum)] = emp3;
+
+	// 키를 인덱스 값으로 이용해서 탐색
+	r1 = empInfoArr[GetHashValue(20120003)];
+	r2 = empInfoArr[GetHashValue(20130012)];
+	r3 = empInfoArr[GetHashValue(20170049)];
+
+	// 탐색 결과 확인
+	printf("사번 %d, 나이 %d \n", r1.empNum, r1.age);
+	printf("사번 %d, 나이 %d \n", r2.empNum, r2.age);
+	printf("사번 %d, 나이 %d \n", r3.empNum, r3.age);
+	return 0;
+}
+
+
+해쉬함수는 사번을 100으로 나눈 나머지로 계산하는 함수.
+
+크기가 줄어든다.
+
+하지만 이래도 아직 문제는 있다. 바로 충돌이 일어날 수도 있다는 것이다.
+
+
+
+그에 해결로 선형조사법, 이중해쉬 등이 있다.
+
+선형 조사법은 충돌이 일어나는 칸 다음에 값을 저장한다. 그러나 저장된 값이 한 곳에 몰리게 됨으로 좋지 못하다.
+
+
+
+이중해쉬는
+
+1차 해쉬함수에 실패하면 2차 해쉬함수로 위치를 찾아 저장한다.
+
+통계적으로 소수로 모듈러 연산을 할 경우에 좋다는 연구가 있기에 이를 이용해 한다.
+
+
+
+체이닝
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "Person.h"
+#include "Table2.h"
+
+int MyHashFunc(int k)
+{
+	return k % 100;
+}
+
+int main(void)
+{
+	Table myTbl;
+	Person * np;
+	Person * sp;
+	Person * rp;
+
+	TBLInit(&myTbl, MyHashFunc);
+
+	// 데이터 입력 ///////
+	np = MakePersonData(900254, "Lee", "Seoul");
+	TBLInsert(&myTbl, GetSSN(np), np);
+
+	np = MakePersonData(900139, "KIM", "Jeju");
+	TBLInsert(&myTbl, GetSSN(np), np);
+
+	np = MakePersonData(900827, "HAN", "Kangwon");
+	TBLInsert(&myTbl, GetSSN(np), np);
+
+	// 데이터 탐색 ///////
+	sp = TBLSearch(&myTbl, 900254);
+	if(sp != NULL)
+		ShowPerInfo(sp);
+
+	sp = TBLSearch(&myTbl, 900139);
+	if(sp != NULL)
+		ShowPerInfo(sp);
+
+	sp = TBLSearch(&myTbl, 900827);
+	if(sp != NULL)
+		ShowPerInfo(sp);
+
+	// 데이터 삭제 ///////
+	rp = TBLDelete(&myTbl, 900254);
+	if(rp != NULL)
+		free(rp);
+
+	rp = TBLDelete(&myTbl, 900139);
+	if(rp != NULL)
+		free(rp);
+
+	rp = TBLDelete(&myTbl, 900827);
+	if(rp != NULL)
+		free(rp);
+
+	return 0;
+}
+
+
+체이닝은 연결리스트를 기반으로 노드를 형성해, 중복값을 계속해서 연결한다
+
