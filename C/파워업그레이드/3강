@@ -1,0 +1,112 @@
+9번
+
+9-1
+#include <stdio.h>
+
+
+int main(void)
+{
+	int num,sum=0;
+	printf("정수 n입력: ");
+	scanf("%d", &num);
+  
+  while(1)
+  {
+    fputs("1이상의 정수 입력: ",stdout);
+    scanf("%d",&num);
+    
+    if(num>0)
+      break;
+    else
+      puts("1이상의 정수를 입력해야 합니다.);
+  }
+
+	for (int i = 1; i < num+1; i++)
+	{
+		sum += i;
+	}
+	printf("%d", sum);
+	return 0;
+}
+
+9-2
+
+#include <stdio.h>
+
+
+int main(void) 
+{
+	int num1, num2, i;
+	int total = 0;
+	int start, end;
+
+	fputs("두 개의 정수 입력: ", stdout);
+	scanf("%d %d", &num1, &num2);
+
+	if (num1 > num2)
+	{
+		start = num2;
+		end = num1;
+	}
+	else
+	{
+		start = num1;
+		end = num2;
+	}
+
+	for (i = start; i <= end; i++)
+		total += i;
+
+	printf("%d와 %d를 포함하여 그 사이에 있는 정수들의 합 : %d\n", num1, num2, total);
+	return 0;
+}
+
+
+10번
+
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+
+
+int main(void) 
+{
+	int num1, num2, i;
+	int total = 0;
+
+	int start, end ;
+
+	fputs("두 개의 정수 입력: ", stdout);
+	scanf("%d %d", &num1, &num2);
+
+	if (num1 > num2)
+	{
+		start = num2;
+		end = num1;
+	}
+	else
+	{
+		start = num1;
+		end = num2;
+	}
+
+	for (i = start; i <= end; i++)
+	{
+		if (!(i % 3) || !(i % 5))
+		{
+			printf("%d는 합에서 제외. \n", i);
+			continue;
+		}
+		total += i;
+	}
+
+	printf("%d과 %d을 포함하여 그 사이에 있는 정수들의 합 : %d\n", num1, num2, total);
+	return 0;
+}
+
+
+!(i % 3) || !(i % 5)
+->
+(i % 3)==0 || (i % 5)==0과 같은 문장이다.
+
+
+11.
