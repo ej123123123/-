@@ -1,0 +1,128 @@
+12-1
+
+#include <stdio.h>
+
+
+int main(void)
+{
+	int num;
+	int i, j;
+	printf("숫자를 입력하세요. ");
+	scanf("%d", &num);
+
+	if (num == 1)
+	{
+		for (int i = 0; i<4; i++)
+		{
+			for (int j = 1; j<=9; j++)
+			{
+				printf("%d * %d = %d\n", 2*i+1 , j , (2*i+1) * j);
+			}
+		}
+	}
+	else
+	{
+		for (int i = 1; i <= 4; i++)
+		{
+			for (int j = 1; j <= 9; j++)
+			{
+				printf("%d * %d = %d\n", 2 * i , j, (2 * i ) * j);
+			}
+		}
+	}
+
+	return 0;
+}
+
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+
+
+int main(void)
+{
+	int i;
+	int sel = 0;
+	int start = 0;
+
+	while (1)
+	{
+		fputs("홀수 단(1), 짝수 단(2) : ", stdout);
+		scanf("%d", &sel);
+
+		if (sel == 1 || sel == 2)
+			break;
+		else
+			puts("잘못된 입력입니다. 1 또는 2만 입력하세요.");
+	}
+
+	start = (sel == 2) ? 2 : 3;
+	for (; start <= 9; start += 2)
+	{
+		for (i = 1; i < 9; i++)
+			printf("%d x %d = %d \n", start, i, start * i);
+	}
+	return 0;
+
+
+}
+
+12-2
+
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+
+
+int main(void)
+{
+	int num;
+	int a, b, c;
+
+	fputs("정수 입력: ", stdout);
+	scanf("%d", &num);
+
+	for (a = 0; a <= 100; a++)
+	{
+		for (b = 0; b <= 100; b++)
+		{
+			for (c = 0; c <= 100; c++)
+			{
+				if (a * b - c == num)
+					printf("(%d)x(%d)-(%d)=%d\n\n", a, b, c, num);
+			}
+		}
+	}
+	return 0;
+
+}
+
+14
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+
+
+int main(void)
+{
+	int temp = 0;
+	int arr[5];
+	for (int i = 0; i < 5; i++)
+	{
+		printf("숫자 %d입력: ", i + 1);
+		scanf("%d", &arr[i]);
+	}
+
+	for (int i = 0; i < 4; i++)
+	{
+		for (int j = 0; j < 5-i-1; j++)
+		{
+			if (arr[j] > arr[j+1])
+			{
+				temp = arr[j];
+				arr[j] = arr[j+1];
+				arr[j+1] = temp;
+			}
+		}
+	}
+	for(int i=0;i<5;i++)
+		printf("%d ", arr[i]);
+	return 0;
+}
