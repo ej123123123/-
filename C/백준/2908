@@ -1,0 +1,32 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+
+
+int main(void) 
+{
+
+	int one, two, three,num1,num2;
+
+	scanf("%d %d", &num1, &num2);
+
+	one = num1 % 10;
+	two = (num1 / 10) % 10;
+	three = (num1 / 100) % 10;
+
+	num1 = one * 100 + two * 10 + three;
+
+	one = num2 % 10;
+	two = (num2 / 10) % 10;
+	three = (num2 / 100) % 10;
+
+	num2 = one * 100 + two * 10 + three;
+
+	if (num1 > num2)
+		printf("%d", num1);
+	else
+		printf("%d", num2);
+
+	return 0;
+	
+
+}
