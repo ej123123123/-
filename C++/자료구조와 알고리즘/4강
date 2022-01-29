@@ -1,0 +1,153 @@
+4.1 배열의 정의
+
+배열은 연속된 메모리 공간이다.
+배열의 특성은 인덱스의 사용을 전적으로 사용자에게 맡긴다는 것이다.
+그러므로 배열의 크기는 미리 정해져있고, 배열자체에는 크기의 정보는 제공하지 않는다.
+
+
+배열과 포인터의 관계
+
+포인터는 배열의 첫 번째 메모리를 가리키지만, 순차적으로 옆을 가리킬 수도 있다. 
+array[n]=*(array+n)과 같은 의미이다.
+
+
+4.2 다차원 배열
+
+1차원 배열은 일렬로 나열된 배열이고, 예시로 {1,2,3} 이런 것이 있다.
+2차원 배열은 1차원 배열이 여러 개 있는 배열이다. 에시로 
+{{1,2,3},
+{4,5,6},
+{5,6,7}}
+
+로 구현할 수 있다.
+3차원 배열은 2차원 배열이 여러 개 있는 것이다.
+
+함수의 인자로 배열을 전달할 때는 포인터형 연산이 가능하기에 맨 처음은 비워두도 되지만 그 뒤로는 상수가 채워져있어야 한다.
+
+
+
+
+4.3 미로의 표현과 그리기
+
+미로의 표현
+
+0은 길, 1은 벽으로 정의한다.
+
+미로그리기는 모양에 따라 숫자로 표현한다.
+
+int CMaze::GetShape(int x, int y)
+{
+	if (m_arrayMaze[y][x] != 0)
+	{
+		if (y > 0 && m_arrayMaze[y - 1][x]) //위쪽에 벽이 있으면
+			shape |= UP;
+		if (y < Maze_size - 1 && m_arrayMaze[y + 1][x]) //아래쪽에 벽이 있으면
+			shape |= DOWN;
+		if (x > 0 && m_arrayMaze[y][x - 1])
+			shape |= LEFT;
+		if (x < MAZE_SIZE - 1 && m_arrayMaze[y][x + 1])
+			shape |= RIGHT;
+	}
+	return shape;
+}
+
+
+4.4 우선법
+
+
+미로에서 오른손을 벽에 대고 걸어가면 반드시 출구로 나온다는 것이 증명됐다.
+
+이를 알고리즘으로 구현한 것이 우선법
+
+
+
+void CMaze::GoForward(int& x, int& y, int dir)
+{
+	x = (dir == LEFT ? --x : dir == RIGHT ? ++x : x);
+	y = (dir == UP ? --y : dir == DOWN ? ++y : y);
+}
+bool CMaze::StillInMaze(int x, int y)
+{
+	if (x > 0 && x < Maze_SIZE - 1 && y>0 && < Maze_SIZE - 1)
+		return true;
+	else
+		return false;
+}
+
+//LEFT면 -1 ->왼쪽이동 +면 +1 오른쪽으로 이동을 의미한다. y도 위아래로 이동을 의미함.
+//있으면 true,없으면 false 리턴
+
+bool CMaze::WallAhead(int x, int y, int dir)
+{
+	x = (dir == LEFT ? --x : dir == RIGHT ? ++x : x);
+	y = (dir == UP ? --y : dir == DOWN ? ++y : y);
+	return m_arrayMaze[y][x] != 0;
+}
+
+벽이 앞에 있는지 리턴
+m_arrayMaze 함수가 구현돼있지 않다.
+
+void CMaze::TurnLeft(int& dir)
+{
+	dir >>= 1;
+	dir == (dir == 0 ? LEET : dir);
+}
+
+void CMaze::TurnRight(int& dir)
+{
+	dir <<= 1;
+	dir = (dir > LEFT ? UP : dir);
+}
+void CMaze:::RightHandOnWall(intx, inty, int dir)
+{
+	While(StillInMaze(x, y))
+	{
+		TurnRight(dir);
+		while (WallAhead(x, y, dir))
+		{
+			TurnLeft(dir);
+		}
+		GoForward(x, y, dir);
+	}
+}
+
+int main(void)
+{
+	while (Still_In_maze)
+	{
+		Turn_Right;
+		while (Wall_Ahead)
+		{
+			Turn_Left;
+		}
+		Go_Forward;
+	}
+
+
+
+4.5 최단경로찾기
+
+우선법을 실행 후 중복되게 방문한 곳이 있으면 제거한다.
+
+void CMaze::ShortestPath()
+{
+	int i, j = 0;
+	int x1, y1;
+	while (m_arrayRecord[i] >= 0)
+	{
+		x = m_arrayRecord[i];
+		y = m_arrayRecord[i + 1];
+		j = i + 2;
+		while (m_arrayRecord[i] >= 0)
+		{
+			x1 = m_arrayRecord[j];
+			y1 = m_arrayRecord[j + 1];
+			if (x == x1 && y == y1)
+				j = DeletePath(i, j);
+			j += 2;
+		}
+		i += 2;
+	}
+}
+
+
