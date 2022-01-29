@@ -6,3 +6,78 @@
 
 단순한 typedef의 데이터만 묶는 것이 아닌 기능(함수)도 같이 묶는 것이 class의 시작.
 
+
+클래스의 선언은 보통 헤더파일에 넣고
+
+클래스의 정의는 소스파일에 넣는 것이 일반적이다.
+
+한눈에 보기 쉽게 하기 위해 헤더파일에 선언한다.
+
+인라인 함수는 헤더파일에 선언되어야 한다.
+
+#include <iostream>
+using namespace std;
+
+class Calculator
+{
+private:
+	int numOfAdd;
+	int numOfMin;
+	int numOfMul;
+	int numOfDiv;
+public:
+	void Init();
+	double Add(double num1, double num2);
+	double Min(double num1, double num2);
+	double Mul(double num1, double num2);
+	double Div(double num1, double num2);
+	void ShowOpCount();
+};
+
+void Calculator::Init()
+{
+	numOfAdd = 0;
+	numOfMin = 0;
+	numOfMul = 0;
+	numOfDiv = 0;
+}
+double Calculator::Add(double num1, double num2)
+{
+	numOfAdd++;
+	return num1 + num2;
+}
+double Calculator::Min(double num1, double num2)
+{
+	numOfMin++;
+	return num1 - num2;
+}
+double Calculator::Mul(double num1, double num2)
+{
+	numOfMul++;
+	return num1 * num2;
+}
+double Calculator::Div(double num1, double num2)
+{
+	numOfMin++;
+	return num1 / num2;
+}
+
+void Calculator::ShowOpCount()
+{
+	cout << "덧셈: " << numOfAdd << ' ';
+	cout << "뺄셈: " << numOfMin << ' ';
+	cout << "곱셈: " << numOfMul << ' ';
+	cout << "나눗셈: " << numOfDiv << ' ';
+}
+
+int main(void)
+{
+	Calculator cal;
+	cal.Init();
+	cout << "3.2 +2.4 = " <<cal.Add(3.2, 2.4) << endl;
+	cout << "3.5 -1.7 = " << cal.Min(3.5, 1.7) << endl;
+	cout << "2.2 * 1.5 = " << cal.Mul(2.2, 1.5) << endl;
+	cout << "4.9 / 1.2 = " << cal.Div(4.9,1.2) << endl;
+	cal.ShowOpCount();
+	return 0;
+}
