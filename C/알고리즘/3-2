@@ -1,0 +1,194 @@
+2 고급 정렬 알고리즘
+
+
+1)병합정렬
+
+병합정렬은 Divide and Conquer로 분할정복을 의미한다.
+
+더 이상 나누지 못할 때 까지 나눈다음에 다시 합치는 것을 반복한다.
+
+
+mergeSort(A[],p,r)
+{
+  if(p<r)then
+  {
+    q<(p+r)/2);
+    mergeSort(A,p,q);
+    mergeSort(A,q+1,r);
+    merge(A,p,q,r);
+  }
+}
+
+merge(A[],p,q,r)
+{
+}
+
+
+코드 구현
+
+
+#include <stdio.h>
+
+#define SIZE 101
+
+int temp[SIZE] = { 0 };
+void mergeSort(int A[], int p, int r)
+{
+	if (p < r)
+	{
+		int q = (p + r) / 2;
+		mergeSort(A, p, q);
+		mergeSort(A, q + 1, r);
+		merge(A, p, q, r);
+	}
+}
+
+void merge(int A[],int p,int q, int r)
+{
+	int i = p;
+	int j = q + 1;
+	int t = 1;
+	while (i <= q && j <= r)
+	{
+		if (A[i] <= A[j])
+			temp[t++] = A[i++];
+		else
+			temp[t++] = A[j++];
+	}
+	while (i <= q)
+	{
+		temp[t++] = A[i++];
+	}
+	while (j <= q)
+	{
+		temp[t++] = A[j++];
+	}
+	i = p;
+	t = 1;
+	while (i <= r)
+	{
+		A[i++] = temp[t++];
+	}
+}
+
+
+T(n)<={ a         if n=1
+      {2T(n/2)+cn if n>1
+
+T(n)<=2T(n/2)+cn
+    <=2(2T(n/4)+c*(n/2))+cn=2^2T(n/2^2)+2cn
+    <=2^2(ET(n/2^3)+c(n/2^2)+2cn=2^3T(n/2^3)+3cn
+    .
+    .
+    .
+    <=2^kT(n/2^k)+kcn
+    =nT(1)+kcn=an+cnlogn
+    =세타(nlogn)
+
+
+2)퀵정렬
+
+
+하나의 값을 피봇으로 설정하고
+
+그 값보다 작은 건 전부 왼쪽으로 그 값보다 큰 값은 전부 오른쪽으로 보낸다. 
+
+이때 정렬된 필요는 없다.
+
+
+quickSort(A[],p,r)
+{
+  if(p<r) then
+  {
+    q<partition(A,p,r);
+    quickSort(A,p,q-1);
+    quickSort(A,q+1,r);
+  }
+}
+
+Partition(A[],p,r)
+{
+  x<-A[r];
+  i<-p-1;
+  for j<-p to r-1
+    if(A[j]<=x)then A[++i]<->A[j];
+  A[i+1]<->A[r];
+  return i+1;
+  
+}
+  
+
+
+힙정렬
+
+힙은 완전 이진트리의 일종으로
+
+우선순위에 따라 배열한다.
+
+부모의 우선순위가 자식의 우선순위보다 높아야한다.
+
+
+힙정렬방법
+1)배열을 힙으로 만든다.
+2)값을 하나씩 제거한다.
+3)아무것도 남지 않으면 끝난다.
+
+제거된 순서가 정렬의 순서가 된다.
+
+힙 구현
+
+buildHeap(A[],n)
+{
+  for i<- n/2 downto 1
+    heapify(A,i,n);
+    
+}
+
+heapify(A[],k,n) //n은 최대인덱스
+{
+  left <-2k;
+  right<-2k+1;
+  
+  if(right<=n)then
+    (if(A[left]<A[right] 
+      then smaller<-left;
+    else
+      smaller<-right;
+    }
+    else if(left<=n) then
+      smaller<-left;
+    else
+      return;
+    
+    if(A[smaller]<A[k]) then
+    {
+      A[k]<->A[smaller];
+      heapify(A,smaller,n);
+    }
+}
+
+
+3-3 비교정렬 시간의 하한
+
+위의 정렬도
+최악의 경우에 nlogn을 가질 수 있다.
+
+
+3-4 특수 정렬 알고리즘
+
+그렇다면 최악의 경우 정렬시간이 nlogn보다 더 빠를 수는 없는가?
+
+
+기수정렬
+
+
+기수 정렬은 자리수가 같은 특수한 상황에서 사용할 수 있다.
+
+맨 끝자리에 따라 큐에 각각 분류해 넣는다.
+
+그리고 다시 순서대로 꺼낸다음, 뒤에서 두번째 자리수에 따라 넣고 다시 꺼낸다.
+
+그럼 정리가 된다.
+
+
+O(n)의 시간복잡도를 가질 수 있다.
