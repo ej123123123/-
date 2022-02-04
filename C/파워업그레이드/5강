@@ -1,0 +1,154 @@
+15번
+
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+
+int main(void)
+{
+	
+	while (1)
+	{
+		
+		char ch;
+		ch = getchar();
+		fflush(stdin);
+		{
+			
+			break;
+		}
+		if (ch >= 'a' && ch <= 'z')
+			printf("입력하신 문자는 알파벳 소문자입니다.\n");
+		else if (ch >= 'A' && ch <= 'Z')
+			printf("입력하신 문자는 알파벳 대문자 입니다.\n");
+		else if (ch >= '0' && ch < '9')
+			printf("입력하신 문자는 아라비아 숫자입니다.\n");
+		else
+			printf("특수문자를 입력하셨군요.");
+	}
+	printf("프로그램을 종료합니다.");
+	return 0;
+}
+
+
+0과 9도 따옴표를 붙여야한다.
+getchar()는 하나의 글자를 읽어오는 함수로, 입력버퍼를 이용하기에 입력버퍼에 들어가는 \n을 비워줄 필요가 있다.
+
+
+16.
+
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <string.h>
+#define STR_LEN 256
+
+int main(void)
+{
+	
+	char str[STR_LEN];
+	int strLen = 0;
+	int i;
+
+	int diff = 'A' - 'a';
+
+	fputs("문자열 입력 : ", stdout);
+	gets(str);
+	strLen = strlen(str);
+
+	for (i = 0; i < strLen; i++)
+	{
+		if ('a' <= str[i] && str[i] <= 'z')
+			str[i] += diff;
+		else if ('A' <= str[i] && str[i] <= 'Z')
+			str[i] -= diff;
+		else
+			;
+		
+
+	}
+	puts(str);
+	return 0;
+}
+
+get를 통해 띄어쓰기가 있어도 받을 수 있다.
+
+
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <string.h>
+#define STR_LEN 256
+
+int main(void)
+{
+	char ch;
+	int diff = 'A' - 'a';
+
+	fputs("문자열 입력: ", stdout);
+	while (1)
+	{
+		ch = getchar();
+
+		if (ch == '\n')
+			break;
+		else if ('a' <= ch && ch <= 'z')
+			putchar(ch + diff);
+		else if ('A' <= ch && ch <= 'Z')
+			putchar(ch - diff);
+		else
+			putchar(ch);
+	}
+	return 0;
+}
+
+바로받아서 바로출력한다.
+
+18
+
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <string.h>
+#define STR_LEN 20
+#define STR_NUM 4
+#define TOTAL_STR_LEN (STR_LEN*STR_NUM)
+
+int main(void)
+{
+	char str1[STR_LEN];
+	char str2[STR_LEN];
+	char str3[STR_LEN];
+	char str4[STR_LEN];
+
+	char mergeString[TOTAL_STR_LEN] = { 0 , };
+
+	char* strArr[4] = { str1,str2,str3,str4 };
+	char* strTempPtr;
+	int i, j;
+
+	for (i = 0; i < STR_NUM; i++)
+	{
+		printf("문자열 입력 %d : ", i + 1);
+		gets(strArr[i]);
+	}
+
+	for (i = 0; i < STR_NUM - 1; i++)
+	{
+		for (j = 0; j < (STR_NUM - i) - 1; j++)
+		{
+			if (strcmp(strArr[j], strArr[j + 1]) > 0)
+			{
+				strTempPtr = strArr[j];
+				strArr[j] = strArr[j + 1];
+				strArr[j + 1] = strTempPtr;
+			}
+		}
+	}
+
+	for (i = 0; i < STR_NUM; i++)
+	{
+		strcat(mergeString, strArr[i]);
+		mergeString[strlen(mergeString)] = ' ';
+
+		
+	}
+	printf("정렬된 문자열: %s\n", mergeString);
+	return 0;
+}
