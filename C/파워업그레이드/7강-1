@@ -1,0 +1,124 @@
+문제 25
+
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <string.h>
+void SortArr(int* arr, int num);
+void ReadAndSortPrint(int number);
+
+int main(void)
+{
+	int num;
+	fputs("입력할 정수의 개수 : ", stdout);
+	scanf("%d", &num);
+
+	ReadAndSortPrint(num);
+	return 0;
+}
+
+void SortArr(int* arr, int num)
+{
+	int i, j, temp;
+
+	for (i = 0; i < num - 1; i++)
+	{
+		for (j = 0; j < (num - i) - 1;j++);
+		{
+			if (arr[j] > arr[j + 1])
+			{
+				temp = arr[j];
+				arr[j] = arr[j + 1];
+				arr[j + 1] = temp;
+			}
+		}
+	}
+}
+
+void ReadAndSortPrint(int number)
+{
+	int arr[number];
+	int i;
+
+	for (i = 0; i < number; i++)
+	{
+		printf("%d 번째 입력: ", i + 1);
+		scanf("%d", &arr[i]);
+	}
+
+	SortArr(arr, number);
+
+	puts("입력된 숫자의 정렬된 출력");
+	for (i = 0; i < number; i++)
+		printf("%d ", arr[i]);
+	printf("\n");
+}
+
+
+이 코드를 고쳐야한다.
+
+배열을 선언할 때 C99에서는 상수가 아닌 변수도 허용했지만, 2022년인 아직도 비주얼스튜디오에선 이걸 허용하지 않고 있다.
+그렇기에 배열을 미리 선언해서 동적할당으로 바꿔야한다.
+
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <string.h>
+void SortArr(int* arr, int num);
+void ReadAndSortPrint(int number);
+
+int main(void)
+{
+   int num;
+   fputs("입력할 정수의 개수 : ", stdout);
+   scanf("%d", &num);
+
+   ReadAndSortPrint(num);
+   return 0;
+}
+
+void SortArr(int* arr, int num)
+{
+   int i, j, temp;
+
+   for (i = 0; i < num - 1; i++)
+   {
+      for (j = 0; j < (num - i) - 1;j++);
+      {
+         if (arr[j] > arr[j + 1])
+         {
+            temp = arr[j];
+            arr[j] = arr[j + 1];
+            arr[j + 1] = temp;
+         }
+      }
+   }
+}
+
+void ReadAndSortPrint(int number)
+{
+   //int arr[number];
+   int * arr;
+   int i;
+
+   arr = (int*)malloc(number * sizeof(int));
+
+   for (i = 0; i < number; i++)
+   {
+      printf("%d 번째 입력: ", i + 1);
+      scanf("%d", &arr[i]);
+   }
+
+   SortArr(arr, number);
+
+   puts("입력된 숫자의 정렬된 출력");
+   for (i = 0; i < number; i++)
+      printf("%d ", arr[i]);
+   printf("\n");
+   free(arr);
+}
+
+
+말록함수로 바꿔준다.
+
+
+
+
