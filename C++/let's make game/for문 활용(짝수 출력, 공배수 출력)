@@ -1,0 +1,63 @@
+짝수출력
+
+int main()
+{
+	int i;
+
+	for (i = 2; i <= 100 ; i+=2)
+	{
+		
+			cout << i<<endl ;
+
+	}
+	return 0;
+}
+
+//for의 마지막에 식도 쓸 수 있다.
+
+
+3과 7의 공배수
+int main()
+{
+	int i;
+
+	for (i = 1; i <= 100; i++)
+	{
+		if (i % 3 == 0 && i & 7 == 0)
+			cout << i << endl;
+	}
+	return 0;
+}
+
+
+별찍기
+
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+	int i;
+
+	for (i = 0; i < 5; i++)
+	{
+		for (int j = 0; j < i + 1; j++)
+		{
+			cout << "*";
+		}
+		cout << endl;
+	}
+
+	for (int i = 0; i < 5; i++)
+	{
+		for (int j = 0; j < 5 - i; j++)
+		{
+			cout << "*";
+		}
+		cout << endl;
+	}
+
+
+	return 0;
+}
