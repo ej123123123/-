@@ -1,0 +1,141 @@
+2.1 Rule based Machin Learning Overview
+
+
+
+머신러닝의 종류
+
+1) 규칙 기반 접근
+
+2) 전통적 통계 기반 접근
+
+3) 정보 이론 접근
+
+->규칙 기반 기계학습, 의사결정트리, 선형회귀
+
+
+
+A perfect world for Rule Based Learing
+
+
+
+관측오류X, 에러X, 모든 정보 제공
+
+목표함수가 정해져있다.
+
+
+
+sky	temp	humid	wind	water	forecst	enjoyspt
+sunny	warm	normal	strong	warm	same	yes
+sunny	warm	high	strong	warm	change	yes
+rainy	cold	high	strong	cool	change	no
+
+
+Function Approximation
+
+더 나은 함수를 만드는 것-> 머신러닝
+
+어떤 피처에 Yes를 도출하는가?
+
+
+
+데이터 훈련
+
+가설: >햇빛, 따뜻, 일치, ? ? ?> ->Yes
+
+
+
+구체적인 것(많은 것이 해당됨)
+
+ex) 햇빛,따듯,일치해야 놀러 나감
+
+일반적인것(적은 것이 해당됨)
+
+ex) 햇빛만 있어도 놀러나감
+
+
+
+Find-S Algorithm
+
+가설과 피처가 일치하면 아무것도 하지 않는다.
+
+가설과 피처가 일치하지 않을 경우, 합집합을 만들어 ?로 표시한다. (둘 중 어떤 것이든 상관 없는 상태)
+
+
+
+Version Space
+
+가설=version space가 같은 것에서 범위를 찾아내는 것.
+
+
+
+Progress of Candidate Elimination Algorithm
+
+가장 구체적인 것 - 뭘해도 안 나가는 상황
+
+구장 일반적인 것 - 뭘해도 나가는 상황
+
+
+
+이 바운더리를 좁혀준다.
+
+
+
+위의 이론들은 perfect world에서는 잘 작동하지만, 현실에서는 에러가 있기 때문에 잘 작동하지 않을 수 있다.
+
+
+
+
+
+의사결정트리
+
+이분법적으로 어떨 떄 나가노는지를 고른다.
+
+
+
+Entropy
+
+불확실성을 나타낸 것.
+
+-> 불확실성을 줄이는 것이 중요하다.
+
+
+
+P가 1/2 -> 가장 불확실한 상황, 동등할수록 불확실하다
+
+P가 한쪽으로 치우쳐짐 -> 확실성이 높은 상황
+
+
+
+H(X)= -∑P(X=x)logbP(X=x)
+
+H(Y|X)​  조건부 확률이다. 특정 상황에서의 불확실성을 뽑는다.
+
+H(X)-H(Y|X)
+
+-> Information gain
+
+일반적 상황에서 특정 상황을 제거한다.
+
+
+
+
+
+의사결정 트리의 문제점
+
+-> 기존의 데이터로는 잘 처리하지만, 새로운 데이터가 들어올 경우에는 잘 적용하지 못한다!
+
+
+
+
+
+선형회귀분석
+
+최적의 세타를 찾는 것
+
+
+
+최소자승합으로 오차를 찾는 것. 공식을 입력하고 싶지만, 블로그의 한계로 실패함
+
+블로그에 수식을 입력하는 방법을 알면 자세하게 기재하겠음.
+
+​
