@@ -251,6 +251,91 @@ The conditional Get
 
 
 
+2.3 Electronic Mail Preview
+이메일의 4가지 요소
+
+1) 유저 에이전트
+
+2) 메일 서버
+
+3) 프로토콜(SMTP)
+
+4) 메일접근 프로토콜(Mail access protocol)
+
+
+
+User agent
+
+메일을 수정, 읽고 구성함.
+
+
+
+mail server
+
+메일박스는 메시지를 갖고 있다.
+
+나갈 메시지의 순서를 갖고 있다.
+
+
+
+STMP
+
+클라이언트: 서버에 메일을 보낸다.
+
+서버: 메일을 서버로 받는다
+
+
+
+2.3.1 SMTP
+HTTP보다 오래된 프로토콜로서 특정 절차를 구한다.
+
+인사를 하고, 메시지를 보낸다 등 여러가지 절차를 거쳐 메일을 보낸다.
+
+
+
+
+
+2.3.2 Comparison with HTTP
+HTTP는 pull protocol이다.
+
+누가 정보를 인터넷에 올려두면 HTTP는 그 정보를 가져온다
+
+SMTP는 push protocol이다.
+
+메일 서버에 파일을 보낸다.
+
+
+
+2.3.3 Mail Message Formats
+메일은 특정 형식을 가지는데, 헤더와 바디를 가진다.
+
+header에는 
+
+To, From, subject 등이 적힌다.
+
+
+
+body에는 아스키 코드등이 적힌다.
+
+
+
+2.3.4 Mail Access Protocols
+POP3(Post Offie Protocol-Version3)
+
+authorization, transaction, update 세 개의 프레이즈로 구성되어 있다.
+
+authorization: 유저의 이름과 패스워드를 보낸다.
+
+transaction: 메시지를 받는다. 
+
+update: 세션을 종료한다.
+
+
+
+Internet Maill Acess Protocol(IMAP)
+
+심플하다. 서버에 메일을 요청하고 받는다.
+
 
 
 2.4 DNS-The Internet's Directory Service
@@ -322,3 +407,141 @@ DNS message
 
 
 식별, 깃발 등 여러가지 값을 갖고 있다.
+
+
+
+
+
+2.5 Peer-to_peer File Distribution
+각각의 end system들이 서로 통신을 하다.
+
+ex) 토렌트, 스트리밍, 스카이프 등
+
+
+
+P2P의 역사
+
+1) Napster: centralized directory
+
+피어들이 모두 하나의 서버에 연결, 클라이언트A가 파일을 요청하면 그 파일을 갖고 있는 클라이언트B에게 이 정보를 주도록 한다.
+
+
+
+하나의 서버가 죽으면 모두가 망한다.
+
+
+
+2) Gnutella
+
+하나의 클라이언트가 여러개의 클라이언트에게 쿼리를 날리고, 그 받은 컴퓨터가 또 쿼리를 날린다. 그래서 쿼리가 있는 컴퓨터가 있다고 수신을 보내면, 처음 요청을 받은 클라이언트와 있다고 한 컴퓨터가 파일을 날려준다.
+
+
+
+3) KaZaA
+
+그룹 리더에 이어진 피어들이 있고, 리더와 리더가 소통을 해서 정보를 교환한다.
+
+
+
+
+
+클라이언트 서버 vs P2P의 차이점
+
+서버가 클라이언트에게 서비스를 주면 (
+
+
+
+' N개의 클라이언트x 파일크기)/ 전송속도'
+
+
+
+이정도가 걸린다. 
+
+
+
+
+
+그러나 P2P에서는 파일을 획득한 파일이 다시 제공자가 되기 때문에 갈수록 걸리는 시간이 줄어든다.
+
+
+
+
+토렌트
+
+다른 P2P는 파일 단위로 했지만, 토렌트는 파일을 비트단위로 짤라서 다시 나눔을 실행한다.
+
+
+
+P2P에서는 어떤 컴퓨터가 어떤 파일을 갖고 있는지 아는 것이 중요!
+
+
+
+Tracker는 어떤 파일을 어디에 갖고 있는지를 알려주는 역할을 한다.
+
+가장 적은 파일 또는 바이트를 가진 것을 가장 먼저 쉐어를 한다.
+
+
+
+
+
+Distributed Hash Table(DHT)
+:P2P의 데이터베이스
+
+키와 값으로 이루어진 해시테이블 구조로 되어 있다.
+
+
+
+
+
+2.6 Video Streaming and Content Distribution Networks
+2.6.1 Internet Video
+큰 양의 데이터를 어떻게 전송해야하는지가 중요하다.
+
+
+
+2.6.2 HTTP streaming and DASH
+DASH:Dynamic, Adaptive Streaming over HTTP
+
+
+
+HTTP는 모든 클라이언트가 같은 비디오 인코딩을 받는다. 하지만 현실의 접속하는 방법은 스마트폰, 컴퓨터 등 다양하다. 이에 따라 DASH가 쓰인다.
+
+
+
+서버:
+
+파일을 여러 덩어리로 자른다.
+
+각각은 다른 레이트로 인코딩된다.
+
+다른 URL을 각각 청크를 갖는다.
+
+
+
+클라이언트
+
+주기적으로 서버와 클라이언트의 필요한 시간을 체크한다.
+
+그리고 필요한 수치만큼 인코딩 레이트등을 조절한다.
+
+
+
+각각 다른 비율로 다르게 인코딩을 해서 제공한다
+
+
+
+2.6.3 Content Distribution Networks
+데이터양이 증가해서 큰 서버가 필요하다. 그렇기에 넓은 곳에 서버를 분배해서 설치한다.
+
+
+
+서버가 너무 멀면 데이터를 가져오기에 오래 걸린다. 그렇기에 카피본을 곳곳에 뿌려놓는다.
+
+
+
+Enter deep: 작은 것을 여러 개
+
+Bring Home: 큰 것을 적게
+
+
+
