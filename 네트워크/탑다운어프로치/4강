@@ -1,0 +1,310 @@
+4.1 Overview of Network 
+
+
+네트워크 레이어
+
+네트워크에서 패킷이 어떻게 이동하는가?
+
+
+
+애플리케이션이 데이터를 요청하고 transport layer는 신뢰성잇는 전송을 하고, 이 데이터를 받아서 다시 애플리케이션 레이터로올라간다.
+
+
+
+라우터는 헤더의 필드를 보고 어디로 패킷을 보내야할지 결정한다.
+
+
+
+4.1.1 Fowarding and Routing: The data and Control Plans
+Two key network-layer function
+
+1) Forwarding
+
+패킷을 라우터의 인풋에서 적절한 아웃풋으로 전달
+
+2) Routing
+
+소스로부터 도착지까지 라우터를 사용해 목적지 결정
+
+라우터의 알고리즘(프로토콜) - RIP, OSPF, IS-IS, BGP
+
+
+
+
+
+Data plane
+
+데이터가 어떻게 라우터에 도착해서 라우터에서 나가는지에 대한 기능
+
+
+
+Control plane
+
+어디를 거쳐야 목적지까지 가는 최선의 경로인가를 결정
+
+
+
+traditional routing algorithms:
+
+라우터에 기능이 구현됨
+
+
+
+software-defined networking(SDN):
+
+서버에서 기능이 구현됨
+
+
+
+전통적인 방법
+
+라우터에 포워딩 테이블이 있어서, 패킷의 헤더를 보고 어디로 보낼지를 결정함.
+
+
+
+SDN방법
+
+중앙에 있는 Remote Controller가 경로를 결정해서 라우터에 지시해줌
+
+
+
+4.1.2 Network Service Model
+네트워크가 패킷을 어떻게 처리하는지에 대한 모델
+
+
+
+개인 데이터에 대한 서비스
+
+guranteed delivery
+
+guranteed delivery with less than 40 msec delay
+
+
+
+데이터의 흐름에 대한 서비스
+
+In order datagram delivery
+
+guranteed minimum bandwidth to flow
+
+Restrictions on changes in inter-packet spacing
+
+
+
+
+
+4.2 What's Inside a Router?
+라우터는 그냥 모니터가 없는 PC처럼 생겼다
+
+
+
+
+인풋포트로 들어와서 스위치 페브릭으로 간다음에 아웃풋 포트로 간다.
+
+
+
+
+
+4.2.1 Input Port Processing and Destination_based Forwarding
+Line termination: 데이터가 옮
+
+link layer protocol: 링크레이어 프로토콜이 받음
+
+lookup forwarding: 대기열에서 어디로 보낼지 결정함
+
+
+
+어떤 아웃풋포트로 내보낼지 결정하는 방법
+
+Longest prefix matching
+
+가장 매칭이 많이 되는 것을 목적지로 패킷을 넘긴다.
+
+
+
+
+
+4.2.2 Switching
+인풋 버퍼에서 적절한 아웃풋버퍼로 패킷을 옮김
+
+
+
+메모리 방법: 아웃풋 포트를 기억했다가 그곳으로 보냄
+
+버스 방법: 모든 인풋포트가 같은 길을 통해 적절한 목적지로 감
+
+cross  bar: 여러 개의 길이 있음
+
+
+
+4.2.3 Output Port Processing
+버퍼링: 스위치에서 온 것을 대기열에 둠
+
+스케줄링: 큐에서 데이터를 선택
+
+
+
+
+
+4.2.4 Where Does Queing Occur?
+
+
+Input port queing
+
+스위치 페브릭이 느려서 데이터를 다 처리하지 못함
+
+여러 개의 패킷이 여러 곳에서 오기에 빨리 처리되는 곳이 빨리 들어올 수 있음
+
+
+
+Packet Scheduler
+
+패킷 선택 방법
+
+FIFO방법
+
+가중치를 넣는 방법
+
+
+
+버리는 방법
+
+늦게 온 거 버리기
+
+Active queue management
+
+랜덤하게 선택해서 꽉 차기 전에 버림
+
+
+
+
+
+
+
+4.3 The Internet Protocol (IP):IPv4, Addersing, IPv6, and More
+IP
+
+데이터그램의 포맷 설정
+
+convention을 다루는 패킷
+
+
+
+ICMP
+
+에러 리포팅
+
+라우터의 시그널링
+
+
+
+
+
+4.3.1 IPv4 Datagram Format
+
+
+
+Version number: IP프로토콜의 버전을 나타낸다.
+
+Header length: 옵션을 포함할 수 있는데, 어떤 옵션에 따라 그 길이가 다른다.
+
+Type of service: 데이터그램의 다른 타입은 분류될 수 있게된다. 스위치에서 분류할 떄 이정보를 사용한다.
+
+Datagram length: 이더넷 프레임에 맞는지 확인한다
+
+Time-to-live: 반응이 오지 않았을 때 살아잇는 시간을 결정한다.
+
+
+
+
+
+4.3.2 IPv4 Datagram Fragmentation
+데이터가 여러가지 데이터타입에 상호작용하기 위해서 데이터를 조각낸다.
+
+
+
+MTU(maximum transmission unit): 데이터링크의 최대량
+
+
+
+MTU로 데이터를 내보내지만, 노드에서 보낼 수 있는 양이 이보다 작다면, 잘라서 보내야한다.
+
+하지만 이 데이터를 잘라도 앞에 헤더를 붙여야 하기에 자를수록 데이터의 전체양이 늘어난다.
+
+
+
+
+
+4.3.3 IPv4 Addressing
+IP adress: 32비트 라우터 인터페이스와 호스터를 위한 구별연산자다
+
+interface: 호스트와 라우터의 연결하는 물리적 링크다
+
+
+
+IP adress
+
+subnet part - high order bits
+
+host part - low order bits
+
+
+
+subnet이란? 
+
+같은 서브넷에 있으면 앞부분이 같은 주소를 갖고 있다.
+
+라우터의 개입없이 물리적으로 연결돼있다.
+
+
+
+subnet mask: 서브넷에 속해있는 단말들의 비트가 얼마나 같은지를 표현
+
+
+
+
+
+CIDR: classless interdomain routing
+
+임의의 길이 주소의 서브넷의 한 부분을 다룬다.
+
+
+
+223.1.1.0/24 의 의미
+
+
+
+앞의 24비트가 서브넷 마스크다. 모두 24비트는 공통으로 가진다.
+
+
+
+
+
+subnetting
+
+90개의 단말기, 60개의 단말기, 30개의 단말기가 각각 다른 위치에 있다
+
+이 때 서브넷을 어떻게 나눌 것인가?
+
+
+
+90개는 2^7 = 128비트가 필요하다.
+
+뒤의 7비트는 보장하고 나머지는 25비트는 서브넷으로 묶는다
+
+
+
+
+
+DCHP:Dynamic Host Configuration Protocol: 동적으로 주소를 서버로 받는다.
+
+plug-and-play
+
+
+
+IP 주소를 서버로부터 자동으로 할당받는다.
+
+
+
+
+
