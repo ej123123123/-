@@ -306,5 +306,153 @@ IP 주소를 서버로부터 자동으로 할당받는다.
 
 
 
+DHCP는 어떤 컴퓨터가 들어올지 모를 때 동적으로 할당해줄 때 쓴다.
+
+새로 들어온 단말은 요청을 하고 DHCP서버가 이를 받아서 신호를 준다.
 
 
+
+4.3.4 NAT: network address translation
+일반적으로 Private network에 접근할 수 없다. 밖에서 오는 주소를 중간에서 local network에 접근할 수 있게 변환해주는 기능이 있어야하는데 이게 NAT다
+
+
+
+IP주소가 부족해져서 NAT가 필요해졌다. 제한된 주소가 있기 때문에 하나의 글로벌 주소를 여러개의 로컬주소로 바꿔준다.
+
+들어올 때 포트번호를 통해서, 어떤 컴퓨터로 갈지를 결정한다.
+
+
+
+그렇기에 NAT이 있기에 다 동일한 아이피를 쓸 수 있다.
+
+
+
+ICMP: internet control message protocol
+
+네트워크 레벨에서 라우터와 호스트가 통신한다.
+
+
+
+4.3.5 IPv6
+IPv4는 늘어나는 기기의 주소를 할당하기 힘들다. IPv6은 32비트 주소체계로 훨씬 많은 주소를 저장할 수 있다.
+
+헤더포멧을 바꾸는 것이 스피드에도 도움이 된다
+
+헤더가 다른 기능을 위해 바뀔 수 있다.
+
+
+
+현재는 기존 비디오뿐만 아니라 스트리밍 등 여러가지 형태가 등장했다.
+
+
+
+IPv6 - Addressing Model
+
+1) Link model
+
+서브넷 안에서만 쓰인다. private IP 주소
+
+2) Unique local
+
+글로벌로는 하나, 로컬은 여러개
+
+3) Global
+
+ip4 글로벌과 같다
+
+4) Multicast
+
+하나-여러개 통신한다
+
+
+
+IPv4헤더와의 변화
+
+Traffic Class: 플로우 데이터에서 우선순위
+
+Flow Label: 같은 플로우인지 확인
+
+Next Header: 위 헤더 프로토콜과 확인
+
+Checksum: 타임에 못하면 제거
+
+Options:여러 옵션들 명시
+
+
+
+Stateless Address Auto-configuration
+
+주소할당엔 수동vs자동의 방법이 있는데, IPv6에서는 더 동적으로 가능하다.
+
+어떤 서버도 관여하지않고 운영체제 내에서 글로벌 주소를 자동할당할 수 있다.
+
+
+
+IPv6은 프래그멘테이션을 제공하지 않는다.
+
+그렇기에 처음에 데이터를 우선 보내고, 라우터의 MTU보다 그 페이로드가 많다면 처리할 수 없다는 신호를 받고 다시 그에 맞춰서 잘라서 보낸다.
+
+
+
+IPv6이 IPv4의 라우터를 통과하게 되면, 앞에 IPv4의 헤더를 장착해서 지나간다
+
+
+
+4.4 Generalized Forwarding and SDN
+각각의 라우터는 flow table을 갖고 있고, control plane이 이를 나눠주고 data plane은 데이터를 보내기만 한다.
+
+
+
+Abstraction
+
+flow: 헤더필드에 의해 정의된다
+
+generalized forwarding: 단순한 패킷핸들링 규칙
+
+pattern: 패킷헤더필드와 값을 매칭
+
+action: drop, forward, modify 등등 활동함
+
+priority: 패턴을 분명히함
+
+counters: 패킷이 얼마나 처리됐는지 등을 기록
+
+
+
+
+
+Openflow abstraction
+
+
+
+match+action: 다른 종류의 장치를 통합한다.
+
+Router:
+
+match longest destination IP prefix를 사용해 매칭한다
+
+action: 링크로 포워드
+
+
+
+Switch:
+
+match:MAC address를 통해 매칭
+
+action: flood로 포워드
+
+
+
+Firewall
+
+match:IP주소와 TCP/UDP포트의 숫자를 매칭시킴
+
+action: 승인 혹은 거절
+
+
+
+NAT:
+
+match: IP address and port
+
+action: 주소나 포트를 다시 씀
