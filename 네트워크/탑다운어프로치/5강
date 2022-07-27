@@ -1,0 +1,133 @@
+5.1 Introduction
+포워딩: 데이터페킷을 라우터로부터 적절한 라우터의 아웃풋으로 내보낸다.
+
+라우팅: 패킷으로부터 라우터를 결정한다.
+
+
+
+Two approaches to strucuring network control plane:
+
+per-router control
+
+logically centralized control
+
+
+
+
+
+per-router control에서는 라우터가 각각 포워드 테이블을 갖고 있어서 서로 연결된다.
+
+
+
+ogically centralized control에서는 라우터가 중앙에 하나의 컨트롤러에 정보를 제공하면 중앙의 센터에서 갈 곳을 알려준다.
+
+
+
+
+
+5.2 Routing Algorithms
+목표: 어떤 path가 최적의 path인지를 고르는 것
+
+
+
+path: 라우터 패킷이 가는 길의 순서( 처음 소스로부터 마지막 목적지까지)
+
+good: 적은 비용, 빠름, 적읂 ㅗㄴ잡
+
+
+
+그래프를 그려서 최소트리를 그릴 수 있다.
+
+
+
+
+
+라우팅 알고리즘
+
+1) Global
+
+모든 라우터들이 위치와 링크 등 정보를 안다.
+
+링크스테이트
+
+
+
+2) Decentralized
+
+라우터는 물리적으로 연결된 이웃만 정보를 안다.
+
+옆에 있는 라우터가 괜찮다고 하는 쪽으로 넘긴다.
+
+Distance vector 알고리즘
+
+
+
+static
+
+라우터가 시간에 따라 느리게 바뀐다
+
+
+
+dynamic
+
+라우터가 빨리빨리 바뀐다
+
+주기적
+
+링크 비용에 따라
+
+
+
+5.2.1 The Link-state(LS) Routing Algorithm
+dijkstra's algorithm
+
+경로와 비용을 모두 알고 있기에 최소 값만 찾아서 간다.
+
+
+
+5.2.2 The Distance-Vector (DV) Routing Algorithm
+Bellman_Ford
+
+가장 가까운 노드의 비용과 그 노드에서 가까운 노드의 비용을 합해서 가장 적은 노드를 고른다.
+
+
+
+5.4 Routing Among the ISPs:BGP
+autonomous systems(AS)는 aggregate router이다. (도메인과 같음)
+
+
+
+intra-AS routing
+
+라우팅에서는 같은 AS를 가진다.
+
+AS안에 있는 라우터들은 같은 도메인 프로토콜을 가진다.
+
+다른 AS에 있으면 다른 라우팅 프로토콜을 가진다.
+
+
+
+동일한 라우터들끼리 통신하기 위해 존재한다.
+
+
+
+AS란
+
+IP라우팅 prefix의 집합이다.
+
+
+
+
+
+
+인트라는 AS 내부끼리
+
+인터는 AS끼리
+
+
+
+
+
+
+
+5.4.1 The role of BGP
