@@ -92,14 +92,24 @@ Bellman_Ford
 
 
 
-5.4 Routing Among the ISPs:BGP
+5.3 Intra-As Routing in the internet:OSPF
+
+
+인터넷이 발전하고 사용자가 많아짐에 따라 그 크기와 관리에 어려움이 있다. 그에 따라 나온 것이 AS이다.
+
 autonomous systems(AS)는 aggregate router이다. (도메인과 같음)
+
+
+
+AS안의 라우터들은 같은 알고리즘으로 작동한다.
 
 
 
 intra-AS routing
 
-라우팅에서는 같은 AS를 가진다.
+AS안에서 작동되는 라우팅 알고리즘
+
+
 
 AS안에 있는 라우터들은 같은 도메인 프로토콜을 가진다.
 
@@ -126,8 +136,109 @@ IP라우팅 prefix의 집합이다.
 
 
 
+Intra-As Routing
+
+RIP: Routing information protocol
+
+OSPF:Open shortest Path First
+
+IGRP:Interior Gateway Routing Protocol
 
 
 
+
+
+OSPF의 특징
+
+보안: 인증된 메시지만 받는다
+
+비용: 여러 개의 비용을 골라 쓸 수 있다.
+
+멀티캐스트: 한 번에 여러 단말에 패킷을 보낼 수 있다.
+
+
+
+5.4 Routing Among the ISPs:BGP
+다른 AS끼리 소통하는 방법이 BGP다
+
+BGP(Border Gateway Protocol)
+
+
+
+eBGP: 근처 ASs로 부터 정보를 얻는다.
+
+iBGP: 정보를 내부에서 얻는다.
 
 5.4.1 The role of BGP
+1) 인근 AS로부터 prefix recharbility information을 얻는다
+
+2) 최고의 경로를 고른다.
+
+
+
+5.4.2 Advertising BGP Route Information
+각각의 주소를 aggregation을 해서 옆의 AS에게 전달해준다.
+
+각각의 주소를 서브넷으로 묶고 그 주소를 전달해주는 것이다.
+
+
+
+
+
+5.4.3 Determining the Best Routes
+Hot Potato Routing
+
+가장 짧은 거리가 아니더라도, 빨리 내보낼 수 있는 곳에서 내보낸다.
+
+내부의 비용이 가장 적은 곳으로 내보낸다.
+
+
+
+5.4.5 Routing Policy
+여러 proivder와 client가 있으면 provider끼리 정보를 공유해줄 수 있다. 그러나 자기한테 돈 안낸사람의 것은 다른 사람한테 공유해주지 않는다.
+
+
+
+
+
+5.5 The SDN Control Plane
+기존의 독립적 라우터에서는 데이터의 통제나 이런 것이 불가능했기에 중앙에 통제하는 곳을 만들고 라우터는 그냥 스위칭 기능만 담당하게 만들었다.
+
+
+
+흐름을 제어할 수 있고, 데이터를 분할하기 쉽고, 네트워크를 선택할 수 있다.
+
+또한 프로그래밍 해서 중앙에서 쉽게 바꿀 수 있다.
+
+
+
+
+
+5.6 ICMP: The Internet Control Message Protocol
+ICMP는 코드와 그 기능이 있다. 0~8까지 있는데 각각의 기능이 있다.
+
+
+
+5.7 Network Management and SNMP
+사람이 수동적으로 네트워크를 통제하기 어렵기에 자동적으로 통제할 방법을 만드는 것이 SNMP 프로토콜이다.
+
+
+
+5.7.1 The Network management Framework
+관리되는 디바이스,관리하는 디바이스로 나누어서 정보를 모아서 이를 통제하고 관리한다.
+
+
+
+
+
+5.7.2 The Simple Network Management Protocol(SNMP)
+
+
+manage type과 function이 있다.
+
+헤더에 이런 값들이 있어서 정보를 전달한다.
+
+
+
+
+
