@@ -1,0 +1,229 @@
+6.1 Introduction to the Link Layer
+data-link layer 노드에서 물리적으로 인접한 노드로 데이터를 보낸다.
+
+
+
+Nodes: 호스트와 라우터
+
+Links: 인접한 노드를 연결하는 커뮤니케이션 채널.
+
+
+
+Frame: 데이터그램에 2개의 패킷을 합친다
+
+
+
+6.1.1 The Services Provided by the Link Layer
+Framing, link acess
+
+:데이터그램에 헤더와 트레일러를 붙인다.
+
+
+
+MAC address는 프레임 헤더에서 소스와 목적지를 구분한다.
+
+
+
+Reliable delivery between adjacent nodes
+
+신뢰성있는 전송을 도와준다.
+
+
+
+Flow control
+
+:신호를 주고받는 페이스 조절
+
+
+
+Error detection and connection: 에러를 찾아준다.
+
+
+
+2가지 링크타입
+
+1) Point to point link
+
+각각 장치들끼리 모두 연결되어 있다
+
+2) Broadcast link
+
+중간의 하나의 연결체가 있어서 여러 디바이스가 연결된다
+
+
+
+Two sublayers of link layer
+
+Data link control sublayer
+
+-> 일반적으로 일어나는 모든 문제를 다룬다
+
+Media access control sublayer
+
+-> 브로드캐스트 링크에 해당하는 특정 문제를 다룬다
+
+
+
+6.1.2 Where is the Link Layer Implemented
+NIC, adapter
+
+어댑터 사이에서 소통이 일어난다.
+
+
+
+Sending side
+
+보내는 쪽은 데이터를 요약해서 보낸다.
+
+에러체크코드, 신뢰성있는 전달 등을 한다
+
+
+
+Receving side
+
+에러가 있는지 받고 이를 다시 전달함
+
+데이터그램을 추출한다.
+
+
+
+6.2 Error-Detection and - Correction Techniques
+EDC라는 에리디텍션코드를 첨부해서 보낸다.
+
+에러디텍션 코드가 올바른지 아닌지 확인한다.
+
+
+
+Parity Checking
+
+0또는 1의 갯수를 센다. 만약 0의 개수가 바뀌면 데이터가 변경된 것이다.
+
+
+
+Cyclic redundancy check
+
+데이터 비트는 D, r을 CRC비트로 고른다.
+
+r+1을 G로 선정하고
+
+
+
+<D,R>을 G로 나눠지는지 본다.
+
+만약 이것이 나눠지지 않는다면 에러로 본다.
+
+
+
+
+
+
+
+6.3 Multiple access protocols
+하나의 공유된 브로드캐스트 채널
+
+신호를 동시에 받게되면 방해가 일어난다.
+
+Collision: 같은 시간에 두 개 이상의 신호가 오는 경우
+
+
+
+언제 누가 데이터를 보낼 것인가를 중앙의 통제가 아니라 스스로 결정하게 할 수 있게하는 것
+
+
+
+
+
+한 채널에서 R비트의 레이트로 보낼 수 있다면, 충족하길 원하는 조건
+
+1) R을 꽉 채워서 보낸다
+
+2) M개의 노드가 있다면 R/M만큼 나눈다
+
+3) 중앙통제가 없이 알아서 한다.
+
+4). 간단하다
+
+
+
+
+
+Types of MAC protocol
+
+
+
+Max= Media Access Control
+
+1) Channel Partitioing
+
+채널을 작은 조각으로 나눈다.
+
+그 조각들이 노드를 독점적으로 사용하게 한다.
+
+2) 랜덤 접근
+
+채널을 나누지 않고 충돌을 허용한다.
+
+충돌에서 복구하는 방법을 찾는다.
+
+3) Taking turns
+
+순서대로 한다.
+
+순서를 정하고 어떻게 적절한 시간이 될지 정한다
+
+
+
+
+
+1) Channel Partitioing
+
+TDMA:time division multiple access
+
+시간마다 몇 개의 슬롯을 할당할지를 정한다.
+
+
+
+2) Random access protocols
+
+한가할 때 데이터를 보낸다.
+
+서로 짜고 데이터를 보내는 순서를 보내지 않는다.
+
+
+
+동시에 여러 단말이 보내는 경우, 기다렸다가 10분후 보내거나, 계속 보내거나 등 방법이 있다.
+
+
+
+랜덤접근의 예
+
+1) ALOHA
+
+신호가 오면 보낸다
+
+2) Slotted ALOHA
+
+시간을 같은 슬롯으로 나누고 모든 프레임은 같은 사이즈를 갖고 있다.
+
+한 번에 데이터를 보내고 충돌이 나면, 눈치를 보고 보내는 곳도 있고 안 보내는 곳도 있다.
+
+이 때 다 안보내기로 하면 노는 구간이 발생하고 다 보내면 데이터를 못 보낸다. 그러면 또 눈치싸움을 한다.
+
+3)CSMA(carrier sense multiple access)
+
+데이터를 보내기 전에 미리 눈치를 보고 보낸다.
+
+
+
+Vulnerable time
+
+하지만 눈치를 보지만 신호를 이전에 보냈지만 눈치를 보는데도 시간이 걸리기에 충돌이 일어날 수도 있다.
+
+
+
+CSMA/CD
+
+데이터를 보내고 손 놓고 있는 게 아니라 계속 눈치를 본다.
+
+
+
