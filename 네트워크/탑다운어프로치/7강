@@ -1,0 +1,194 @@
+7.1 Introduction
+디바이스는 랩탑, 스마트폰 등이 있다.
+
+Relay - 유선과 무선 사이에 패킷을 보내는 것을 담당한다.
+
+
+
+
+
+Wireless link
+
+base station과 기기들을 연결한다. 
+
+
+
+base station
+
+패킷을 주고받는 것을 책임진다.
+
+모바일장치를 유선네트워크에 연결한다.
+
+
+
+handoff:
+
+base station을 바꾸게 해주는 것. 유선네트워크에 연결하게 해줌
+
+
+
+ad hoc mode
+
+base station이 없고, 범위 안에 있는 단말기등을 통해 소통을 한다.
+
+
+
+
+
+기반시설O
+
+Single hop
+
+호스트는 base station에 연결한다.
+
+
+
+multiple hops
+
+호스트는 메쉬를 통해 더 큰 인터넷에 연결한다.
+
+
+
+기반X
+
+Single hop
+
+블루투스나 ad hoc nets
+
+multiple hops
+
+wireless node MANET, VANET에 연결할 것
+
+
+
+
+
+7.2 Wireless Link Characteristics
+신호의 감소: 점점 나아갈수록 신호가 줄어든다
+
+간섭: 무선에서는 신호의 방해가 있다
+
+multipath propagation: 신호가 흘러가는 길이 보장되지 않아 다른 모양, 다른 목적지에 도착할 수 있다.
+
+
+
+문제점
+
+Hidden terminal problem
+
+A와 B, B와 C는 연결이 가능하고,  A와 C는 연결이 되지 않는 범위에 있다고 가정하자.
+
+B가 중간에 있어서 A와 C의 연결은 방해가 된다.
+
+
+
+
+
+7.3 WIFI: 802.11 Wireless LANs
+
+
+802.11b는 무선 연결 id이다.
+
+최대 11Mbps
+
+
+
+802.11a는 안테나가 한 개이다
+
+802.11n은 여러개 안테나가 있어서 속도가 더 빠르다.
+
+
+
+base station= access point(AP)
+
+
+
+인터넷과 중간에 스위치가 있어서 base station이 단말간 소통을 가능하게 한다.
+
+
+
+7.4 Cellular Internet Access
+Basic service set: 하나의 base station으로 연결된 네트워크
+
+Extended service set:bss가 여러개 합쳐진 네트워크
+
+
+
+AP는 자동으로 채널을 선택할 수 없다.
+
+주파수를 고르기 위해 관리가 필요하다.
+
+
+
+Host는 무조건 AP를 찾아야 한다.
+
+
+
+Passive scannig
+
+단말은 가만히 있고 Ap들로부터 프레임을 받는다.
+
+그럼 단말은 이에 반응을 한다.
+
+AP는 다시 이에 응답을 하고 연결이 된다./
+
+
+
+active scanning
+
+단말이 자신의 존재를 알리고 AP가 받아서, 다시 연결된다.
+
+
+
+802.11 Mac Protocol:CSMA/CA
+
+1) 채널이 비었으면 데이터를 전부 보낸다.
+
+그리고 잘 도착하면 ack을 보낸다.
+
+
+
+2) 채널이 꽉 차있으면 back of 시간을 갖는다.
+
+그리고 시간이 지난 후에 데이터를 보낸다. 그리고 ack이 안오면 다시 기다렸다가 보낸다.
+
+
+
+Avoiding collisions
+
+데이터를 무조건 보내지 않고 채널을 예약한다.
+
+작은 양의 RTS(request to send)를 BS에 보낸다.
+
+그리고 반응이 괜찮다고 하면 데이터를 보낸다.
+
+
+
+7.5 Mobility Management Principles
+802.11 frame:addressing
+
+
+
+주소가 4가지가 있다
+
+주소1: 무선 호스트나 AP의 맥주소
+
+주소2: 프레임을 전송하는 호스트나 AP의 맥주소
+
+주소3: 상호작용할 라우터의 맥주소
+
+주소4: ad hoc을 위한 주소
+
+
+
+
+
+7.6 Mobile IP
+mobility within same subnet
+
+아이피는 같은 라우터에서는 유지된다.
+
+AP가 같은 서브넷에서 신호를 헷갈릴 수 있다.
+
+
+
