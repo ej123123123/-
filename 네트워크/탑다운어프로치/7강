@@ -181,14 +181,62 @@ Avoiding collisions
 
 
 
-
-
-7.6 Mobile IP
 mobility within same subnet
 
 아이피는 같은 라우터에서는 유지된다.
 
 AP가 같은 서브넷에서 신호를 헷갈릴 수 있다.
 
+7.6 Mobile IP
+휴대폰을 갖고 지역을 움직여도 어떻게 네트워크에 접속할 수 있을까
+
+-> 움직일 때마다 새 주소를 할당받아야 한다.
 
 
+
+그러나 새 주소를 받으면 또 움직이면, 자신이 보냈다는 것을 모른다.
+
+그렇기에 결국은 나라는 것을 알 수 있는 주소를 알아야 한다.
+
+
+
+Indirect routing: home agent가 내 패킷을 받고 이를 전달해준다.
+
+direct routing: 모바일에서 주소를 받아서 모바일로 준다
+
+
+
+
+
+
+
+7.7 Managing Mobility in Cellular Networks
+home network: 기기가 있는 곳
+
+permanant address: 홈 네트워크에 있는 주소
+
+home agent: 홈네트워크를 위해 네트워킹을 함
+
+
+
+visited network: 옮겼을 때 있는 잠시 있는 기기가 있는 네트워크
+
+밖에 있어도 permanet adress로 생각한다
+
+care of address: visited network에서 할당받은 주소
+
+foreign agent: visited에 있는 라우터
+
+
+
+home agent로 패킷을 보내면 hone agent가 forign agent로 패킷을 보내준다.
+
+
+
+mobile IPv6에서는 주소가 넉넉하기 때문에 forign agent가 필요없어졌다.
+
+단말이 스스로 care-of address를 생성할 수 있고 연결할 수 있게되었다.
+
+
+
+하지만 이렇게 중간에서 알려주는 방법은 연결이 끊어지지는 않지만 느리다.
