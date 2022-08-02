@@ -1,0 +1,132 @@
+8.1 What is Network security?
+데이터를 전달하면 잘 가야한다.
+
+
+
+Confidentiality: 보내는 사람과 받는 사람만 내용을 알아야한다.
+
+Message Integritiy:메시지가 손상되지 않고 가야한다.
+
+End-point authentication: 보내는 사람과 받는 사람이 서로가 진짜여야 한다. 도중에 바뀌면 안된다.
+
+Operational security: public network에 대부분의 기기가 연결되어 있는데 이 소통과정에서 침해당하면 안 된다.
+
+
+
+8.2 Principles of Cryptography
+메시지를 암호화한다음에 해석하는 과정을 거친다.
+
+plaintext or cleartext:암호화되지 않은 메시지
+
+
+
+8.2.1 symmetric Key cryptography
+암호화의 기본적인 룰은 한 문자를 다른 것으로 바꾸는 것이다.
+
+Caesar cipher: 한 문자를 다른문자로 바꾼다. 바꾸는 규칙이 있다.
+
+monoalphabetic cipher: 한 문자를 다른 문자로 바꾸지만, 랜덤하게 바꾼다.
+
+
+
+
+
+해커는 암호화된 메시지, 전하는 메시지만 알아도 이를 변경해서 보안을 위협할 수 있다.
+
+
+
+그렇기에 이중암호화도 사용할 수 있다.
+
+
+
+Block ciphers
+
+메시지를 일정 비트로 분할해서 표에 각각 매칭을 시키는 방법이다.
+
+
+
+
+
+8.2.2 Public Key Encryption
+두 개의 키를 갖는데, 하나는 공개키고 하나는 사적인 키다. 공개키는 그냥 네트워크에 보내고 사람은 사적인 키를 갖는다.
+
+
+
+RSA
+
+모듈러 연산을 통해서 암호화를 한다.
+
+그리고 이 해석하는 테이블이 있다.
+
+
+
+
+
+8.3 Message Integrity and Digital Signatures
+메시지가 딴 곳으로 새지 않고 그대로 가야한다.
+
+
+
+8.3.1 Cryptographic Hash Functions
+해쉬테이블을 만든다.
+
+해시테이블을 두개 만들어서 받는 쪽 해시테이블, 중간해시테이블을 만들어서 둘을 매칭시킨다.
+
+
+
+check sum을 보내서 이를 체크하게 한다.
+
+
+
+8.3.2 Message Authentication Code
+같이 공유하는 코드가 있다. 
+
+1) 공유하는 키와 해시를 계산한다.
+
+2) 보내는 사람은 MAC을 메시지에 덧붙인다.
+
+3) 받는 사람은 이를 확인해보고 괜찮은지 확인한다.
+
+
+
+8.3.3 Digital Signatures
+디지털 세계에서 그 문서의 소유자를 명시하고 싶을 수 있다.
+
+
+
+앞에서 배운 공개키 방식처럼, 두 개의 키를 가지고 서명을 한다.
+
+그리고 앞서배운 해시방식으로 하는 방법도 있다.
+
+
+
+
+8.4 End-Point Authentication
+상대가 진짜인지 아닌지 구별하는 방법이다.
+
+
+
+8.4.1 Authentication Protocoal ap1.0
+그냉 내가 나라고 말한다.
+
+
+
+8.4.2  Authentication Protocoal ap2.0
+잘 아는 네트워크가 있어서 IP데이터그램으로 매칭을 시켜서 맞는지 확인한다.
+
+
+
+8.4.3 Authentication Protocoal ap3.0
+공유된 비밀번호를 사용한다.
+
+
+
+8.4.4 Authentication Protocoal ap4.0
+A가 B에게 메시지를 보내면 B가 임시메시지를 다시 보낸다.
+
+다시 메시지를 받으면 이를 해석하고 다시 암호화해서 메시지를 보낸다.
+
+
+
+
+
