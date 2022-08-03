@@ -130,3 +130,171 @@ A가 B에게 메시지를 보내면 B가 임시메시지를 다시 보낸다.
 
 
 
+8.5. Securing E-Mail
+하위레벨이 아닌 상위레벨(애플리케이션 레이어)에서의 보안도 살펴보자.
+
+8.5.1 Secure E-Mail
+앞에서 말했던 공개키 암호화 방식이나 해시테이블 방식을 사용한다.
+
+
+
+8.5.2 PGP
+Pretty Good Privacy
+
+PGP 소프트웨어를 깔면, 공개키 쌍을 만들고, 웹사이트에 이것이 올려진다. ﻿
+
+그리고 패스워드가 비밀키로 사용된다.
+
+
+
+
+
+8.6 Securing TCp Connections:SSL
+Secure Sockets Layers(SSL)
+
+Transport Layer Security(TLS)
+
+
+
+SSL은 API를 제공해서 소켓에서 보안이 가능하게 해준다.
+
+
+
+8.6.1 The big picture
+SSL은 3가지 순서가 있다.
+
+1) handshake
+
+2) key derivation
+
+3) data transfer
+
+
+
+8.6.2 A more Complete Picture
+패킷에서 Data아 MAC부분이 암호화되어 있다.
+
+1) 클라이언트는 암호화딘 알고리즘을 보낸다
+
+2) 서버는 대칭 알고리즘을 고른다. 그리고 클라이언트에게 서로 아는 용어를 보낸다
+
+3) 클라이언트는 이 받은 키를 확인한다
+
+4) Key derivation function을 이용해 클라이언트와 서버는 MS를 계산한다.
+
+5) 클라이언트는 MAC을 보낸다
+
+6) 서버는 MAC을 또 보낸다.
+
+
+
+
+
+8.7 Network_Layer Security:IPsec and Virtual Private Networks
+IPses(IP securitiy protocol)
+
+VPNs(virtual private networks)
+
+
+
+8.7.1 IPsec and Virtual Private Networks(VPNs)
+사적네트워크를 사용해 보안을 유지할 수 있지만 가상적으로 개인 네트워크를 만들어서 쓰는 게 VPN이다.
+
+인터넷 패킷에 IP헤더와, IPsec헤더를 덧붙여서 전송을 한다.
+
+
+
+8.7.2 The AH and ESP Protocols
+AH(authentication Header)
+
+Esp(Encapsulation Security Protocol)
+
+
+
+8.7.3 Security Associations
+Security assocation(SA): 소스와 도착지 간의 논리적인 연결관계
+
+
+
+라우터와 라우터 사이에는 SA가 있다.
+
+32비트의 identifier, SPI(Security Parameter Index)
+
+
+
+8.7.4 The IPsec Datagram
+New Ip header,
+
+ESP header
+
+Original IP header
+
+Original IP datagram payload
+
+ESP trailer
+
+ESP MAC
+
+
+
+등으로 데이터그램이 만들어져있다. 이를 통해 구분을 한다.
+
+
+
+
+
+8.8 Securing Wireless LANs
+Wired Equivalent Privacy(WEP)
+
+
+
+8.8.1 Wired Equivalent Privacy(WEP)
+1)무선호스트는 진짜를 AP에서 요구한다.
+
+2) AP는  128비트의 값으로 이에 응한다
+
+3) 호스트는 이 값을 대칭키를 이용해 암호화한다
+
+4) AP는 이를 다시 복호화한다.
+
+
+
+8.8.2 IEEE 802.11i
+2004년에 나온 새로운 표준이다.
+
+AP와 authentication server간의 통신을 규약한다.
+
+
+
+1) 클라이언트와 AP간에 securtity 능력을 찾는다
+
+2) 클라이언트와 AP가 서로 확인이 되면 MK를 만든다
+
+3) 클라이언트는 PMK(Pairwise Master Key)를 만든다
+
+4) 그리고 서버는 같은 키를 AP에 보낸다.
+
+5) 이것을 가지고 서로 확인한다.
+
+
+
+8.9 Operational security:Firewalls and Intrusion Detection Systems
+8.9.1 Firewalss
+내부 네트워크를 큰 인터넷에서 격리시키는 하드웨어와 소프트웨어의 조합이다
+
+
+
+허락된 트래픽만 들어간다
+
+
+
+방화벽은 세 가지가 있다.
+
+1) traditional packet
+
+2) stateful
+
+3) application
+
+
+
