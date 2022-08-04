@@ -1,0 +1,221 @@
+9.1 Multimedia Networking Applications
+9.1.1 Properties of Video
+멀티미디어에서는 high bit rate가 특징이다. 많은 비트수를 요구하고 이에 따라 품질이 달라진다.
+
+그렇기에 비디오에서는 압축이 중요하다.
+
+공간적인 중복, 시간적 중복이 있는데 이를 압축하면 품질과 연관이 있다.
+
+
+
+압축방법
+
+Run-length encoding: 중복되는 것을 하나로 모아서 인코딩한다 aaaabbb는 a4b3등
+
+
+
+9.1.2 Properties of Audio
+비디오보다는 비트 수의 부담이 적다.
+
+오디오는 오리지널 신호를 받아서 디지털 신호로 바꾼 이후에 다시 디지털 신호로 바뀌어야 한다.
+
+오디오는 고정된 샘플비율을 갖는다.
+
+비율이 높으면 용량이 크고 비율이 낮으면 음질이 구리기에
+
+VBR처럼 변동해서 측정하는 방법이 있다.
+
+
+
+
+
+9.1.3 Types of Multimedia Network Applications
+Streaming, stored 
+
+:저장된 동영상을 실시간을 ㅗ보는 것
+
+서버는 저장된 것을 보낸다.
+
+Conversational : 서로 주고 받는다. ex) skype
+
+Streamling live: 라이브로 실시간으로 영상을 본다.
+
+
+
+
+9.2 Streaming Stroed Video
+일정한 시간을 두고
+
+
+
+서버에 비디오를 저장
+
+서버는 다시 비디오를 보낸다
+
+클라이언트가 비디오를 본다.
+
+
+
+각각의 상황에서 데이터는 계단식으로 증가한다.
+
+
+
+
+
+
+Playout delay
+
+Client-side buffering
+
+: 전송이 일정한 간격으로 오지 않을 때를 대비하여 버퍼에 데이터를 저장해둔다.
+
+버퍼에 일정량이 쌓여야만 그 이후로 전송을 한다
+
+
+
+
+
+DASH:Dynamic, Adaptive Streaming over HTTP
+
+서버:
+
+파일을 여러 개로 나눈다.
+
+각각 저장된 파일은 다른 비율로 인코딩되어있다.
+
+클라이언트:
+
+주기적으로 서버와 클라이언트의 사이를 측정한다.
+
+
+
+클라이언트는 언제 요청을 하고, 어떤 인코딩 비율로 요청을 하고, 어디에서 요청할지를 정한다.
+
+
+
+9.3 Voice-over IP
+VoIP end-end-delay requirement: conversational한 특징을 갖고 있다.
+
+딜레이가 길어지면 서로 알아들을 수 없다.
+
+일정한 간격이하로 반응이 일어나야한다.
+
+
+
+Session initialization: 어떻게 비디오 데이터를 인코딩해서 보낼 것인가?
+
+
+
+VoIP의 특징
+
+8천번의 샘플링 속도, 20msec마다 8바이트가 와야한다
+
+
+
+Network loss: IP 데이터그램이 너무 지체되면 잃어버린다.
+
+Delay loss: IP dategrame이 너무 늦게 도착하면 잃어버린다.
+
+Loss tolerance: 잃어버릴 비율을 정한다. 
+
+
+
+일정한 간격으로 도착하지 못하는 것은 오히려 버리는 게 더 날 수도 있다.
+
+
+
+그렇기에 고정된 비율로 플레이아웃의 시간을 유지하서 그 할당이 되어야만 데이터를 진행한다. 그러나 이렇게되면 너무 지체될 수도 있다.
+
+
+
+이에 반해 adaptive playout delay adjustment는 상대의 반응에 따라 변동적으로 플레이아웃 시간을 조절하는 것이다.
+
+
+
+
+
+9.4 Protocols for Real-Time conversational applications
+9.4.1 RTP
+SIP:Session Initiation Protocol
+
+세션을 시작하는데 있어서 IP가 아니라 e-mail주소로 상대를 식별한다.
+
+
+
+SIP의 서비스
+
+1) IP주소를 알아낸다
+
+2) Call management
+
+3) call setup
+
+연결은 끊고 연결을 하는 것을 관리한다.
+
+
+
+방법
+
+1) 초청을 보낸다
+
+2) OK를 보낸다
+
+3) ACK를 보낸다
+
+4) 데이터를 전송한다
+
+
+
+9.5 Network Support for Multimedia
+best effort: 기회가 있을 때, 능력이 될 때 패킷을 전송한다.
+
+
+
+Network dimensioning: 얼마의 bandwidth를 할당해야하는가?
+
+Estimating network traffic demand: 얼마나 있을까 예측을 해야한다.
+
+
+
+
+
+클래스(계층)을 나눠서 서비스를 제공한다.
+
+: 많은 데이터가 필요한 것, 적게 필요한 것 등이 있다.
+
+ 그에 차별적인 서비스를 제공한다.
+
+
+
+Diffserv Packet marking:details
+
+6개의 코드가 있고 이것이 패킷에 마킹되어있다.
+
+PHB는 패킷을 받을지 안받을지를 결정한다.
+
+
+
+
+
+Classficiation, condtioning
+
+classfier가 들어온 패킷을 분류한다. 그리고 괜찮다면 Marker가 괜찮다는 마크를 달고 shaper에 전달해서 밖으로 나간다.
+
+
+
+Qos gurantee scenario
+
+스트리밍 서비스를 하고, 보내야 할 데이터가 많다면, 중간에 있는 라우터가 처리할 양보다 많다면 서비스를 낮추고 마크를 해서 데이터를 다음으로 넘긴다
+
+
+
+scheduling policies
+
+Weighted Fair Queing(WFQ)
+
+
+
+분류기는 각각 웨이트에 따라 큐를 나누고 그에 맞게 할당한다. 이에따라 중간으로 와서 이를 처리한다.
+
+
+
